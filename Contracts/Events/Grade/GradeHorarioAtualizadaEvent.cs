@@ -1,4 +1,4 @@
-﻿namespace IntegracaoMicroservicos.Contracts.Events.Grade;
+﻿namespace Contracts.Events.Grade;
 
 public record GradeHorarioAtualizadaEvent(
     Guid TurmaId,

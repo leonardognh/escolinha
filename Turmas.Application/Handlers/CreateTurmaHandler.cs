@@ -3,7 +3,7 @@ using Turmas.Application.Commands;
 using Turmas.Domain.Entities;
 using Turmas.Domain.Interfaces;
 using MassTransit;
-using IntegracaoMicroservicos.Contracts.Events.Turmas;
+using Contracts.Events.Turmas;
 
 namespace Turmas.Application.Handlers;
 

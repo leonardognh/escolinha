@@ -1,5 +1,5 @@
 ﻿using Grade.Infrastructure.Persistence;
-using IntegracaoMicroservicos.Contracts.Events.Materias;
+using Contracts.Events.Materias;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 

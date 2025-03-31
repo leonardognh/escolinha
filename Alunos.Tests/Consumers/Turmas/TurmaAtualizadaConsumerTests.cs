@@ -1,7 +1,7 @@
 ﻿using Alunos.API.Consumers.Turmas;
 using Alunos.Infrastructure.Persistence;
 using FluentAssertions;
-using IntegracaoMicroservicos.Contracts.Events.Turmas;
+using Contracts.Events.Turmas;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;

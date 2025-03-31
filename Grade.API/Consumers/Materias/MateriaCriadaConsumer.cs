@@ -1,6 +1,6 @@
 ﻿using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
-using IntegracaoMicroservicos.Contracts.Events.Materias;
+using Contracts.Events.Materias;
 using MassTransit;
 
 namespace Grade.API.Consumers.Materias;

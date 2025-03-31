@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Grade.Application\Grade.Application.csproj" />
     <ProjectReference Include="..\Grade.Infrastructure\Grade.Infrastructure.csproj" />
-    <ProjectReference Include="..\IntegracaoMicroservicos.Contracts\IntegracaoMicroservicos.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\Contract.csproj" />
   </ItemGroup>
 
 </Project>

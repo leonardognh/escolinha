@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using IntegracaoMicroservicos.Contracts.Events.Turmas;
+using Contracts.Events.Turmas;
 
 namespace Alunos.API.Consumers.Turmas;
 

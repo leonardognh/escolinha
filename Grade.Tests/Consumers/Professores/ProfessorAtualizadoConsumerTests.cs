@@ -2,7 +2,7 @@
 using Grade.API.Consumers.Professores;
 using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
-using IntegracaoMicroservicos.Contracts.Events.Professores;
+using Contracts.Events.Professores;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;

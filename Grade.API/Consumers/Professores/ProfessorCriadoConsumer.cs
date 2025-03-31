@@ -1,6 +1,6 @@
 ﻿using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
-using IntegracaoMicroservicos.Contracts.Events.Professores;
+using Contracts.Events.Professores;
 using MassTransit;
 
 namespace Grade.API.Consumers.Professores;

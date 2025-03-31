@@ -1,4 +1,20 @@
 services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gateway-escola
+    ports:
+      - "5000:5000"
+    depends_on:
+      - professores
+      - alunos
+      - grade
+      - turmas
+      - materias
+    networks:
+      - escola-network
+
   postgres:
     image: postgres:16
     container_name: postgres-escola

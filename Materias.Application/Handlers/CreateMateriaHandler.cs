@@ -3,7 +3,7 @@ using Materias.Application.Commands;
 using Materias.Domain.Entities;
 using Materias.Domain.Interfaces;
 using MassTransit;
-using IntegracaoMicroservicos.Contracts.Events.Materias;
+using Contracts.Events.Materias;
 
 namespace Materias.Application.Handlers;
 

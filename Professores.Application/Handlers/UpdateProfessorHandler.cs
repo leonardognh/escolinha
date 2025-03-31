@@ -1,4 +1,4 @@
-﻿using IntegracaoMicroservicos.Contracts.Events.Professores;
+﻿using Contracts.Events.Professores;
 using MassTransit;
 using MediatR;
 using Professores.Application.Commands;

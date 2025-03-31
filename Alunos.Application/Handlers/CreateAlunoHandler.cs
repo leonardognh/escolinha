@@ -1,7 +1,7 @@
 ﻿using Alunos.Application.Commands;
 using Alunos.Domain.Entities;
 using Alunos.Domain.Interfaces;
-using IntegracaoMicroservicos.Contracts.Events.Alunos;
+using Contracts.Events.Alunos;
 using MassTransit;
 using MediatR;
 

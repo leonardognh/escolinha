@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Grade.API.Consumers.Materias;
 using Grade.Infrastructure.Persistence;
-using IntegracaoMicroservicos.Contracts.Events.Materias;
+using Contracts.Events.Materias;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;

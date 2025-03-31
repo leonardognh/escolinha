@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alunos", "Alunos", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -17,9 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Professores.Domain", "Profe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Professores.Infrastructure", "Professores.Infrastructure\Professores.Infrastructure.csproj", "{1894D25D-B74B-46EC-A4EB-8B548E4B31FC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Itens de Solução", "01 - Itens de Solução", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Professores.Tests", "Professores.Tests\Professores.Tests.csproj", "{BA6AFE74-F634-4026-AB90-EC43C5754FC8}"
@@ -44,9 +45,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grade.Infrastructure", "Gra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grade.Tests", "Grade.Tests\Grade.Tests.csproj", "{4C45A031-2A27-4FB7-AF84-5712E4D80B92}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegracaoMicroservicos", "IntegracaoMicroservicos", "{7AC87124-565F-4837-A256-206512D5DE4D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eventos", "Eventos", "{7AC87124-565F-4837-A256-206512D5DE4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegracaoMicroservicos.Contracts", "IntegracaoMicroservicos.Contracts\IntegracaoMicroservicos.Contracts.csproj", "{D47F42EE-4812-4CDB-81D4-1CFD79545044}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract", "Contracts\Contract.csproj", "{D47F42EE-4812-4CDB-81D4-1CFD79545044}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Turmas", "Turmas", "{3A7BAFAA-80B0-4775-8603-341E6FA70349}"
 EndProject
@@ -71,6 +72,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Materias.Domain", "Materias.Domain\Materias.Domain.csproj", "{381E2C8A-3A73-4E7F-A035-ACF13F4EF934}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Materias.Infrastructure", "Materias.Infrastructure\Materias.Infrastructure.csproj", "{7862BD5E-DD0A-4B3A-A4B8-322CAE973077}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{394ED7B9-870C-49DE-9AF1-C37BAEF5A433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\Gateway.csproj", "{A514B750-B194-44B7-ABB5-461F0CFE8F3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -182,6 +187,10 @@ Global
 		{7862BD5E-DD0A-4B3A-A4B8-322CAE973077}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7862BD5E-DD0A-4B3A-A4B8-322CAE973077}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7862BD5E-DD0A-4B3A-A4B8-322CAE973077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A514B750-B194-44B7-ABB5-461F0CFE8F3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A514B750-B194-44B7-ABB5-461F0CFE8F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A514B750-B194-44B7-ABB5-461F0CFE8F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A514B750-B194-44B7-ABB5-461F0CFE8F3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -213,6 +222,7 @@ Global
 		{10CCE902-42B8-458B-82D4-8F5972CC9AAA} = {CCBCE86D-44C5-4260-944F-1635E0A41785}
 		{381E2C8A-3A73-4E7F-A035-ACF13F4EF934} = {CCBCE86D-44C5-4260-944F-1635E0A41785}
 		{7862BD5E-DD0A-4B3A-A4B8-322CAE973077} = {CCBCE86D-44C5-4260-944F-1635E0A41785}
+		{A514B750-B194-44B7-ABB5-461F0CFE8F3B} = {394ED7B9-870C-49DE-9AF1-C37BAEF5A433}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3061F38-A141-4093-88CA-62BC48FC5755}

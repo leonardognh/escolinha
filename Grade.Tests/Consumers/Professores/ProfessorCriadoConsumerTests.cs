@@ -5,7 +5,7 @@ using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FluentAssertions;
-using IntegracaoMicroservicos.Contracts.Events.Professores;
+using Contracts.Events.Professores;
 
 namespace Grade.Tests.Consumers.Professores;
 

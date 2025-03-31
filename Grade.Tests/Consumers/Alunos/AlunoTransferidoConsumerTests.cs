@@ -2,7 +2,7 @@
 using Grade.API.Consumers.Alunos;
 using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
-using IntegracaoMicroservicos.Contracts.Events.Alunos;
+using Contracts.Events.Alunos;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;

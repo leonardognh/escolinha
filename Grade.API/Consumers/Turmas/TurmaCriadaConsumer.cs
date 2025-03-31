@@ -1,6 +1,6 @@
 ﻿using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
-using IntegracaoMicroservicos.Contracts.Events.Turmas;
+using Contracts.Events.Turmas;
 using MassTransit;
 
 namespace Grade.API.Consumers.Turmas;
