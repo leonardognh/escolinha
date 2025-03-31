@@ -42,7 +42,10 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.MapScalarApiReference(o =>
+    {
+        o.WithTheme(ScalarTheme.Moon);
+    });
 }
 
 app.UseHttpsRedirection();
