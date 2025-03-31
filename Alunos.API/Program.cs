@@ -69,8 +69,6 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
-app.MapScalarApiReference();
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
