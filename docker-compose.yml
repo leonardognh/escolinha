@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-escola
+    restart: always
+    environment:
+      POSTGRES_DB: escola_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - escola-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-escola
+    restart: always
+    ports:
+      - "5672:5672"     
+      - "15672:15672"  
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - escola-network
+
+volumes:
+  pgdata:
+
+networks:
+  escola-network:
+    driver: bridge
