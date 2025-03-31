@@ -6,8 +6,16 @@ using Professores.Domain.Interfaces;
 using Professores.Infrastructure.Persistence;
 using Professores.Infrastructure.Repositories;
 using Scalar.AspNetCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Adiciona EF Core + PostgreSQL
 builder.Services.AddDbContext<ProfessoresDbContext>(options =>

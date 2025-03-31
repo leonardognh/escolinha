@@ -1,12 +1,19 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using Serilog;
 using Turmas.Application.Commands;
 using Turmas.Domain.Interfaces;
 using Turmas.Infrastructure.Persistence;
 using Turmas.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+builder.Host.UseSerilog();
 
 // EF Core com PostgreSQL
 builder.Services.AddDbContext<TurmasDbContext>(options =>
