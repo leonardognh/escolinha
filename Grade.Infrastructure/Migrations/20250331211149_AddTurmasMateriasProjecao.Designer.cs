@@ -3,6 +3,7 @@ using System;
 using Grade.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Grade.Infrastructure.Migrations
 {
     [DbContext(typeof(GradeDbContext))]
-    partial class GradeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250331211149_AddTurmasMateriasProjecao")]
+    partial class AddTurmasMateriasProjecao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

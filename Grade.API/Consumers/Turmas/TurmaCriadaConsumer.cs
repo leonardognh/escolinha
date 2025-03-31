@@ -1,15 +1,35 @@
-﻿using MassTransit;
+﻿using Grade.Domain.Entities;
+using Grade.Infrastructure.Persistence;
 using IntegracaoMicroservicos.Contracts.Events.Turmas;
+using MassTransit;
 
 namespace Grade.API.Consumers.Turmas;
 
 public class TurmaCriadaConsumer : IConsumer<TurmaCriadaEvent>
 {
-    public Task Consume(ConsumeContext<TurmaCriadaEvent> context)
+    private readonly GradeDbContext _db;
+
+    public TurmaCriadaConsumer(GradeDbContext db)
+    {
+        _db = db;
+    }
+
+    public async Task Consume(ConsumeContext<TurmaCriadaEvent> context)
     {
         var e = context.Message;
-        Console.WriteLine($"🟢 [Grade] Nova Turma Criada: {e.Nome} ({e.Turno}) - Ano {e.Ano}");
-        // TODO: Projeção local
-        return Task.CompletedTask;
+
+        var exists = await _db.TurmasProjecao.FindAsync(e.Id);
+        if (exists is not null) return;
+
+        var turma = new TurmaProjecao
+        {
+            Id = e.Id,
+            Nome = e.Nome,
+            Ano = e.Ano,
+            Turno = e.Turno
+        };
+
+        _db.TurmasProjecao.Add(turma);
+        await _db.SaveChangesAsync();
     }
 }

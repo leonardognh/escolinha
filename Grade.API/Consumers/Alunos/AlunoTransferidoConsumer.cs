@@ -1,18 +1,28 @@
-﻿using IntegracaoMicroservicos.Contracts.Events.Alunos;
+﻿using Grade.Infrastructure.Persistence;
+using IntegracaoMicroservicos.Contracts.Events.Alunos;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 
 namespace Grade.API.Consumers.Alunos;
 
 public class AlunoTransferidoConsumer : IConsumer<AlunoTransferidoEvent>
 {
-    public Task Consume(ConsumeContext<AlunoTransferidoEvent> context)
+    private readonly GradeDbContext _db;
+
+    public AlunoTransferidoConsumer(GradeDbContext db)
+    {
+        _db = db;
+    }
+
+    public async Task Consume(ConsumeContext<AlunoTransferidoEvent> context)
     {
         var e = context.Message;
 
-        Console.WriteLine($"🔄 [AlunoTransferido] {e.AlunoId} de {e.TurmaAnteriorId} para {e.TurmaNovaId}");
+        var aluno = await _db.AlunosProjecao.FirstOrDefaultAsync(a => a.Id == e.AlunoId);
+        if (aluno is null) return;
 
-        // TODO: Atualizar projeção de alunos por turma
+        aluno.TurmaId = e.TurmaNovaId;
 
-        return Task.CompletedTask;
+        await _db.SaveChangesAsync();
     }
 }

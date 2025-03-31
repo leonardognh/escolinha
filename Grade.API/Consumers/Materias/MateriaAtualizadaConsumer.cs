@@ -1,15 +1,30 @@
-﻿using MassTransit;
+﻿using Grade.Infrastructure.Persistence;
 using IntegracaoMicroservicos.Contracts.Events.Materias;
+using MassTransit;
+using Microsoft.EntityFrameworkCore;
 
 namespace Grade.API.Consumers.Materias;
 
 public class MateriaAtualizadaConsumer : IConsumer<MateriaAtualizadaEvent>
 {
-    public Task Consume(ConsumeContext<MateriaAtualizadaEvent> context)
+    private readonly GradeDbContext _db;
+
+    public MateriaAtualizadaConsumer(GradeDbContext db)
+    {
+        _db = db;
+    }
+
+    public async Task Consume(ConsumeContext<MateriaAtualizadaEvent> context)
     {
         var e = context.Message;
-        Console.WriteLine($"🟡 [Grade] Matéria Atualizada: {e.Id} -> {e.Nome} ({e.CargaHoraria})");
-        // TODO: Projeção local
-        return Task.CompletedTask;
+
+        var materia = await _db.MateriasProjecao.FirstOrDefaultAsync(m => m.Id == e.Id);
+        if (materia is null) return;
+
+        materia.Nome = e.Nome;
+        materia.Descricao = e.Descricao;
+        materia.CargaHoraria = e.CargaHoraria;
+
+        await _db.SaveChangesAsync();
     }
 }

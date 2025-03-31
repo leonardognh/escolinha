@@ -3,6 +3,7 @@ using System;
 using Grade.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Grade.Infrastructure.Migrations
 {
     [DbContext(typeof(GradeDbContext))]
-    partial class GradeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250331210853_AddAlunosProjecao")]
+    partial class AddAlunosProjecao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,27 +75,6 @@ namespace Grade.Infrastructure.Migrations
                     b.ToTable("GradeHorarios", (string)null);
                 });
 
-            modelBuilder.Entity("Grade.Domain.Entities.MateriaProjecao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int?>("CargaHoraria")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MateriasProjecao", (string)null);
-                });
-
             modelBuilder.Entity("Grade.Domain.Entities.ProfessorProjecao", b =>
                 {
                     b.Property<Guid>("Id")
@@ -109,27 +91,6 @@ namespace Grade.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProfessoresProjecao", (string)null);
-                });
-
-            modelBuilder.Entity("Grade.Domain.Entities.TurmaProjecao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Ano")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Turno")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TurmasProjecao", (string)null);
                 });
 #pragma warning restore 612, 618
         }

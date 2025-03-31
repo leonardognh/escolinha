@@ -1,18 +1,29 @@
-﻿using IntegracaoMicroservicos.Contracts.Events.Professores;
+﻿using Grade.Infrastructure.Persistence;
+using IntegracaoMicroservicos.Contracts.Events.Professores;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 
 namespace Grade.API.Consumers.Professores;
 
 public class ProfessorAtualizadoConsumer : IConsumer<ProfessorAtualizadoEvent>
 {
-    public Task Consume(ConsumeContext<ProfessorAtualizadoEvent> context)
+    private readonly GradeDbContext _db;
+
+    public ProfessorAtualizadoConsumer(GradeDbContext db)
+    {
+        _db = db;
+    }
+
+    public async Task Consume(ConsumeContext<ProfessorAtualizadoEvent> context)
     {
         var e = context.Message;
 
-        Console.WriteLine($"🔄 [ProfessorAtualizado] {e.Id}: {e.Nome} ({e.Email})");
+        var professor = await _db.ProfessoresProjecao.FirstOrDefaultAsync(p => p.Id == e.Id);
+        if (professor is null) return;
 
-        // TODO: Atualizar projeção local
+        professor.Nome = e.Nome;
+        professor.Email = e.Email;
 
-        return Task.CompletedTask;
+        await _db.SaveChangesAsync();
     }
 }

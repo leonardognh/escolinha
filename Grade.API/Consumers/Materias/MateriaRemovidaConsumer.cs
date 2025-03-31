@@ -1,15 +1,28 @@
-﻿using MassTransit;
+﻿using Grade.Infrastructure.Persistence;
 using IntegracaoMicroservicos.Contracts.Events.Materias;
+using MassTransit;
+using Microsoft.EntityFrameworkCore;
 
 namespace Grade.API.Consumers.Materias;
 
 public class MateriaRemovidaConsumer : IConsumer<MateriaRemovidaEvent>
 {
-    public Task Consume(ConsumeContext<MateriaRemovidaEvent> context)
+    private readonly GradeDbContext _db;
+
+    public MateriaRemovidaConsumer(GradeDbContext db)
+    {
+        _db = db;
+    }
+
+    public async Task Consume(ConsumeContext<MateriaRemovidaEvent> context)
     {
         var e = context.Message;
-        Console.WriteLine($"❌ [Grade] Matéria Removida: {e.Id}");
-        // TODO: Remover projeção local
-        return Task.CompletedTask;
+
+        var materia = await _db.MateriasProjecao.FirstOrDefaultAsync(m => m.Id == e.Id);
+        if (materia is not null)
+        {
+            _db.MateriasProjecao.Remove(materia);
+            await _db.SaveChangesAsync();
+        }
     }
 }
