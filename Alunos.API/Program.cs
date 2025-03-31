@@ -29,7 +29,7 @@ builder.Services.AddMassTransit(x =>
 
     x.UsingRabbitMq((ctx, cfg) =>
     {
-        cfg.Host("rabbitmq", "/", h =>
+        cfg.Host(builder.Configuration.GetConnectionString("RabbitMQ"), "/", h =>
         {
             h.Username("guest");
             h.Password("guest");
@@ -55,6 +55,12 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AlunosDbContext>();
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

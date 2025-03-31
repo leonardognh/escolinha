@@ -1,20 +1,4 @@
 services:
-  gateway:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: gateway-escola
-    ports:
-      - "5000:5000"
-    depends_on:
-      - professores
-      - alunos
-      - grade
-      - turmas
-      - materias
-    networks:
-      - escola-network
-
   postgres:
     image: postgres:16
     container_name: postgres-escola
@@ -48,10 +32,78 @@ services:
     container_name: seq-escola
     environment:
       - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINUSERNAME=admin
+      - SEQ_FIRSTRUN_ADMINPASSWORD=admin
     ports:
       - "5341:80"
     volumes:
       - seqdata:/data
+    networks:
+      - escola-network
+
+  professores:
+    build:
+      context: .
+      dockerfile: Professores.API/Dockerfile
+    container_name: professores-api
+    ports:
+      - "5001:80"
+    networks:
+      - escola-network
+
+  alunos:
+    build:
+      context: .
+      dockerfile: Alunos.API/Dockerfile
+    container_name: alunos-api
+    ports:
+      - "5003:80"
+    networks:
+      - escola-network
+
+  grade:
+    build:
+      context: .
+      dockerfile: Grade.API/Dockerfile
+    container_name: grade-api
+    ports:
+      - "5005:80"
+    networks:
+      - escola-network
+
+  turmas:
+    build:
+      context: .
+      dockerfile: Turmas.API/Dockerfile
+    container_name: turmas-api
+    ports:
+      - "5007:80"
+    networks:
+      - escola-network
+
+  materias:
+    build:
+      context: .
+      dockerfile: Materias.API/Dockerfile
+    container_name: materias-api
+    ports:
+      - "5009:80"
+    networks:
+      - escola-network
+
+  gateway:
+    build:
+      context: .
+      dockerfile: Gateway/Dockerfile
+    container_name: gateway-escola
+    ports:
+      - "5000:5000"
+    depends_on:
+      - professores
+      - alunos
+      - grade
+      - turmas
+      - materias
     networks:
       - escola-network
 
