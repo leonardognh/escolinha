@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.4.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.4.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.3" />
@@ -16,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Alunos.Application\Alunos.Application.csproj" />
     <ProjectReference Include="..\Alunos.Infrastructure\Alunos.Infrastructure.csproj" />
+    <ProjectReference Include="..\IntegracaoMicroservicos.Contracts\IntegracaoMicroservicos.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

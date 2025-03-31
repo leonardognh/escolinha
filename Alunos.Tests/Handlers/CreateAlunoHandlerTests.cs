@@ -1,8 +1,8 @@
 ﻿using Alunos.Application.Commands;
-using Alunos.Application.Handlers;
 using Alunos.Domain.Entities;
 using Alunos.Domain.Interfaces;
 using FluentAssertions;
+using MassTransit;
 using Moq;
 
 namespace Alunos.Tests.Handlers;
@@ -13,7 +13,9 @@ public class CreateAlunoHandlerTests
     public async Task Handle_DeveCriarAlunoERetornarId()
     {
         var repositoryMock = new Mock<IAlunoRepository>();
-        var handler = new CreateAlunoHandler(repositoryMock.Object);
+        var publish = new Mock<IPublishEndpoint>();
+
+        var handler = new CreateAlunoHandler(repositoryMock.Object, publish.Object);
 
         var command = new CreateAlunoCommand
         {

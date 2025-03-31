@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using MassTransit;
 using Moq;
 using Professores.Application.Commands;
 using Professores.Application.Handlers;
@@ -14,9 +15,11 @@ public class UpdateProfessorHandlerTests
     {
         var professor = new Professor { Id = Guid.NewGuid(), Nome = "Old", Email = "old@email.com" };
         var repositoryMock = new Mock<IProfessorRepository>();
+        var publish = new Mock<IPublishEndpoint>();
+
         repositoryMock.Setup(r => r.GetByIdAsync(professor.Id)).ReturnsAsync(professor);
 
-        var handler = new UpdateProfessorHandler(repositoryMock.Object);
+        var handler = new UpdateProfessorHandler(repositoryMock.Object, publish.Object);
 
         var command = new UpdateProfessorCommand
         {
@@ -36,9 +39,11 @@ public class UpdateProfessorHandlerTests
     public async Task Handle_DeveLancarExcecaoQuandoProfessorNaoExiste()
     {
         var repositoryMock = new Mock<IProfessorRepository>();
+        var publish = new Mock<IPublishEndpoint>();
+
         repositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Professor?)null);
 
-        var handler = new UpdateProfessorHandler(repositoryMock.Object);
+        var handler = new UpdateProfessorHandler(repositoryMock.Object, publish.Object);
 
         var command = new UpdateProfessorCommand
         {

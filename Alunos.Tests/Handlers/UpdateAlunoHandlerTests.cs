@@ -3,6 +3,7 @@ using Alunos.Application.Handlers;
 using Alunos.Domain.Entities;
 using Alunos.Domain.Interfaces;
 using FluentAssertions;
+using MassTransit;
 using Moq;
 
 namespace Alunos.Tests.Handlers;
@@ -14,9 +15,11 @@ public class UpdateAlunoHandlerTests
     {
         var aluno = new Aluno { Id = Guid.NewGuid(), Nome = "Antigo", Email = "antigo@email.com" };
         var repositoryMock = new Mock<IAlunoRepository>();
+        var publish = new Mock<IPublishEndpoint>();
+
         repositoryMock.Setup(r => r.GetByIdAsync(aluno.Id)).ReturnsAsync(aluno);
 
-        var handler = new UpdateAlunoHandler(repositoryMock.Object);
+        var handler = new UpdateAlunoHandler(repositoryMock.Object, publish.Object);
 
         var command = new UpdateAlunoCommand
         {
@@ -37,9 +40,11 @@ public class UpdateAlunoHandlerTests
     public async Task Handle_DeveLancarExcecao_SeAlunoNaoExiste()
     {
         var repositoryMock = new Mock<IAlunoRepository>();
+        var publish = new Mock<IPublishEndpoint>();
+
         repositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((Aluno?)null);
 
-        var handler = new UpdateAlunoHandler(repositoryMock.Object);
+        var handler = new UpdateAlunoHandler(repositoryMock.Object, publish.Object);
 
         var command = new UpdateAlunoCommand
         {

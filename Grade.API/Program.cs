@@ -1,4 +1,7 @@
-using Grade.API.Consumers;
+using Grade.API.Consumers.Alunos;
+using Grade.API.Consumers.Materias;
+using Grade.API.Consumers.Professores;
+using Grade.API.Consumers.Turmas;
 using Grade.Application.Commands;
 using Grade.Domain.Interfaces;
 using Grade.Infrastructure.Persistence;
@@ -17,16 +20,47 @@ builder.Services.AddDbContext<GradeDbContext>(options =>
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<ProfessorCriadoConsumer>();
+    x.AddConsumer<ProfessorAtualizadoConsumer>();
+
+    x.AddConsumer<AlunoCriadoConsumer>();
+    x.AddConsumer<AlunoTransferidoConsumer>();
+
+    x.AddConsumer<TurmaCriadaConsumer>();
+    x.AddConsumer<TurmaAtualizadaConsumer>();
+
+    x.AddConsumer<MateriaCriadaConsumer>();
+    x.AddConsumer<MateriaAtualizadaConsumer>();
+    x.AddConsumer<MateriaRemovidaConsumer>();
+
     x.UsingRabbitMq((ctx, cfg) =>
     {
-        cfg.Host("localhost", "/", h =>
+        cfg.Host("rabbitmq", "/", h =>
         {
             h.Username("guest");
             h.Password("guest");
         });
-        cfg.ReceiveEndpoint("grade-professor-criado", e =>
+
+        cfg.ReceiveEndpoint("grade-professores", e =>
         {
             e.ConfigureConsumer<ProfessorCriadoConsumer>(ctx);
+            e.ConfigureConsumer<ProfessorAtualizadoConsumer>(ctx);
+        });
+
+        cfg.ReceiveEndpoint("grade-alunos", e =>
+        {
+            e.ConfigureConsumer<AlunoCriadoConsumer>(ctx);
+            e.ConfigureConsumer<AlunoTransferidoConsumer>(ctx);
+        });
+        cfg.ReceiveEndpoint("grade-turmas", e =>
+        {
+            e.ConfigureConsumer<TurmaCriadaConsumer>(ctx);
+            e.ConfigureConsumer<TurmaAtualizadaConsumer>(ctx);
+        });
+        cfg.ReceiveEndpoint("grade-materias", e =>
+        {
+            e.ConfigureConsumer<MateriaCriadaConsumer>(ctx);
+            e.ConfigureConsumer<MateriaAtualizadaConsumer>(ctx);
+            e.ConfigureConsumer<MateriaRemovidaConsumer>(ctx);
         });
     });
 });

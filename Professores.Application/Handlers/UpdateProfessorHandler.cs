@@ -1,29 +1,37 @@
-﻿using MediatR;
+﻿using IntegracaoMicroservicos.Contracts.Events.Professores;
+using MassTransit;
+using MediatR;
 using Professores.Application.Commands;
-using Professores.Domain.Entities;
 using Professores.Domain.Interfaces;
-
-namespace Professores.Application.Handlers;
 
 public class UpdateProfessorHandler : IRequestHandler<UpdateProfessorCommand>
 {
     private readonly IProfessorRepository _repository;
+    private readonly IPublishEndpoint _publish;
 
-    public UpdateProfessorHandler(IProfessorRepository repository)
+    public UpdateProfessorHandler(IProfessorRepository repository, IPublishEndpoint publish)
     {
         _repository = repository;
+        _publish = publish;
     }
 
     public async Task<Unit> Handle(UpdateProfessorCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _repository.GetByIdAsync(request.Id);
-        if (entity is null) throw new Exception("Professor não encontrado.");
+        var professor = await _repository.GetByIdAsync(request.Id)
+            ?? throw new Exception("Professor não encontrado.");
 
-        entity.Nome = request.Nome;
-        entity.Email = request.Email;
-        entity.Telefone = request.Telefone;
+        professor.Nome = request.Nome;
+        professor.Email = request.Email;
 
-        await _repository.UpdateAsync(entity);
+        await _repository.UpdateAsync(professor);
+
+        // 🟢 Publica o evento de atualização
+        await _publish.Publish(new ProfessorAtualizadoEvent(
+            professor.Id,
+            professor.Nome,
+            professor.Email
+        ));
+
         return Unit.Value;
     }
 }

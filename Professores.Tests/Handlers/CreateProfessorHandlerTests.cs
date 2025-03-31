@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using MassTransit;
 using Moq;
 using Professores.Application.Commands;
 using Professores.Application.Handlers;
@@ -13,7 +14,9 @@ public class CreateProfessorHandlerTests
     public async Task Handle_DeveCriarProfessorERetornarId()
     {
         var repositoryMock = new Mock<IProfessorRepository>();
-        var handler = new CreateProfessorHandler(repositoryMock.Object);
+        var publish = new Mock<IPublishEndpoint>();
+
+        var handler = new CreateProfessorHandler(repositoryMock.Object, publish.Object);
 
         var command = new CreateProfessorCommand
         {

@@ -8,7 +8,7 @@ public class GradeDbContextFactory : IDesignTimeDbContextFactory<GradeDbContext>
 {
     public GradeDbContext CreateDbContext(string[] args)
     {
-        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "../Professores.API");
+        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "../Grade.API");
 
         var configuration = new ConfigurationBuilder()
             .SetBasePath(basePath)

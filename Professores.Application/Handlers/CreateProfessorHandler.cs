@@ -1,11 +1,9 @@
-﻿using IntegracaoMicroservicos.Contracts.Events;
+﻿using IntegracaoMicroservicos.Contracts.Events.Professores;
 using MassTransit;
 using MediatR;
 using Professores.Application.Commands;
 using Professores.Domain.Entities;
 using Professores.Domain.Interfaces;
-
-namespace Professores.Application.Handlers;
 
 public class CreateProfessorHandler : IRequestHandler<CreateProfessorCommand, Guid>
 {
@@ -24,13 +22,17 @@ public class CreateProfessorHandler : IRequestHandler<CreateProfessorCommand, Gu
         {
             Id = Guid.NewGuid(),
             Nome = request.Nome,
-            Email = request.Email,
-            Telefone = request.Telefone
+            Email = request.Email
         };
 
         await _repository.AddAsync(professor);
 
-        await _publish.Publish(new ProfessorCriadoEvent(professor.Id, professor.Nome, professor.Email));
+        // 🟢 Publica o evento
+        await _publish.Publish(new ProfessorCriadoEvent(
+            professor.Id,
+            professor.Nome,
+            professor.Email
+        ));
 
         return professor.Id;
     }
