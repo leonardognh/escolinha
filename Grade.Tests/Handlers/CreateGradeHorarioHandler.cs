@@ -8,15 +8,15 @@ using Grade.Domain.Interfaces;
 
 namespace Grade.Tests.Handlers;
 
-public class CreateGradeHorarioHandlerTests
+public class CreateGradeHorariosHandlerTests
 {
     [Fact]
-    public async Task Handle_DeveCriarGradeHorarioERetornarId()
+    public async Task Handle_DeveCriarGradeHorariosERetornarId()
     {
-        var repo = new Mock<IGradeHorarioRepository>();
-        var handler = new CreateGradeHorarioHandler(repo.Object);
+        var repo = new Mock<IGradeHorariosRepository>();
+        var handler = new CreateGradeHorariosHandler(repo.Object);
 
-        var command = new CreateGradeHorarioCommand
+        var command = new CreateGradeHorariosCommand
         {
             TurmaId = Guid.NewGuid(),
             Bimestre = 1,
@@ -30,6 +30,6 @@ public class CreateGradeHorarioHandlerTests
         var result = await handler.Handle(command, CancellationToken.None);
 
         result.Should().NotBeEmpty();
-        repo.Verify(r => r.AddAsync(It.IsAny<GradeHorario>()), Times.Once);
+        repo.Verify(r => r.AddAsync(It.IsAny<GradeHorarios>()), Times.Once);
     }
 }

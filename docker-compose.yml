@@ -72,11 +72,11 @@ services:
     networks:
       - escola-network
 
-  grade:
+  gradehorarios:
     build:
       context: .
       dockerfile: Grade.API/Dockerfile
-    container_name: grade-api
+    container_name: grade-horarios-api
     ports:
       - "5005:80"
     depends_on:
@@ -121,7 +121,7 @@ services:
     depends_on:
       - professores
       - alunos
-      - grade
+      - gradehorarios
       - turmas
       - materias
     networks:

@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Grade.Application.Queries;
 
-public class GetGradeHorarioByIdQuery : IRequest<GradeHorarioDto?>
+public class GetGradeHorariosByIdQuery : IRequest<GradeHorariosDto?>
 {
     public Guid Id { get; set; }
 
-    public GetGradeHorarioByIdQuery(Guid id)
+    public GetGradeHorariosByIdQuery(Guid id)
     {
         Id = id;
     }

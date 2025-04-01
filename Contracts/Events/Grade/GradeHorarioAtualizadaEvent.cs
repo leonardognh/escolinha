@@ -1,6 +1,6 @@
 ﻿namespace Contracts.Events.Grade;
 
-public record GradeHorarioAtualizadaEvent(
+public record GradeHorariosAtualizadaEvent(
     Guid TurmaId,
     int Bimestre,
     IEnumerable<AulaDto> Aulas

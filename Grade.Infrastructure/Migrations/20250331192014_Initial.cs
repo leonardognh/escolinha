@@ -12,7 +12,7 @@ namespace Grade.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "GradeHorarios",
+                name: "GradeHorarioss",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -26,7 +26,7 @@ namespace Grade.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GradeHorarios", x => x.Id);
+                    table.PrimaryKey("PK_GradeHorarioss", x => x.Id);
                 });
         }
 
@@ -34,7 +34,7 @@ namespace Grade.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GradeHorarios");
+                name: "GradeHorarioss");
         }
     }
 }

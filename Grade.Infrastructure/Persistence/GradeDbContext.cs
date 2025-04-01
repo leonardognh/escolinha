@@ -8,7 +8,7 @@ public class GradeDbContext : DbContext
     public GradeDbContext(DbContextOptions<GradeDbContext> options)
         : base(options) { }
 
-    public DbSet<GradeHorario> GradeHorarios => Set<GradeHorario>();
+    public DbSet<GradeHorarios> GradeHorarioss => Set<GradeHorarios>();
     public DbSet<ProfessorProjecao> ProfessoresProjecao => Set<ProfessorProjecao>();
     public DbSet<AlunoProjecao> AlunosProjecao => Set<AlunoProjecao>();
     public DbSet<TurmaProjecao> TurmasProjecao => Set<TurmaProjecao>();
@@ -16,7 +16,7 @@ public class GradeDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<GradeHorario>().ToTable("GradeHorarios");
+        modelBuilder.Entity<GradeHorarios>().ToTable("GradeHorarioss");
         modelBuilder.Entity<ProfessorProjecao>().ToTable("ProfessoresProjecao");
         modelBuilder.Entity<AlunoProjecao>().ToTable("AlunosProjecao");
         modelBuilder.Entity<TurmaProjecao>().ToTable("TurmasProjecao");

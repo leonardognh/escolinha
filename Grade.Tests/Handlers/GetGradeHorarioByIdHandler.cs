@@ -8,13 +8,13 @@ using Grade.Domain.Interfaces;
 
 namespace Grade.Tests.Handlers;
 
-public class GetGradeHorarioByIdHandlerTests
+public class GetGradeHorariosByIdHandlerTests
 {
     [Fact]
     public async Task Handle_DeveRetornarGrade()
     {
         var id = Guid.NewGuid();
-        var grade = new GradeHorario
+        var grade = new GradeHorarios
         {
             Id = id,
             TurmaId = Guid.NewGuid(),
@@ -26,12 +26,12 @@ public class GetGradeHorarioByIdHandlerTests
             ProfessorId = Guid.NewGuid()
         };
 
-        var repo = new Mock<IGradeHorarioRepository>();
+        var repo = new Mock<IGradeHorariosRepository>();
         repo.Setup(r => r.GetByIdAsync(id)).ReturnsAsync(grade);
 
-        var handler = new GetGradeHorarioByIdHandler(repo.Object);
+        var handler = new GetGradeHorariosByIdHandler(repo.Object);
 
-        var result = await handler.Handle(new GetGradeHorarioByIdQuery(id), CancellationToken.None);
+        var result = await handler.Handle(new GetGradeHorariosByIdQuery(id), CancellationToken.None);
 
         result.Should().NotBeNull();
         result!.DiaSemana.Should().Be(DiaSemana.Quarta);
@@ -40,10 +40,10 @@ public class GetGradeHorarioByIdHandlerTests
     [Fact]
     public async Task Handle_DeveRetornarNull_SeNaoEncontrado()
     {
-        var repo = new Mock<IGradeHorarioRepository>();
-        var handler = new GetGradeHorarioByIdHandler(repo.Object);
+        var repo = new Mock<IGradeHorariosRepository>();
+        var handler = new GetGradeHorariosByIdHandler(repo.Object);
 
-        var result = await handler.Handle(new GetGradeHorarioByIdQuery(Guid.NewGuid()), CancellationToken.None);
+        var result = await handler.Handle(new GetGradeHorariosByIdQuery(Guid.NewGuid()), CancellationToken.None);
 
         result.Should().BeNull();
     }

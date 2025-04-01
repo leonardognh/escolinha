@@ -2,7 +2,7 @@
 
 namespace Grade.Application.DTOs;
 
-public class GradeHorarioDto
+public class GradeHorariosDto
 {
     public Guid Id { get; set; }
     public Guid TurmaId { get; set; }

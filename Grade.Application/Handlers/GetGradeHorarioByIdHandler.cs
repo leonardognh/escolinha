@@ -5,20 +5,20 @@ using MediatR;
 
 namespace Grade.Application.Handlers;
 
-public class GetGradeHorarioByIdHandler : IRequestHandler<GetGradeHorarioByIdQuery, GradeHorarioDto?>
+public class GetGradeHorariosByIdHandler : IRequestHandler<GetGradeHorariosByIdQuery, GradeHorariosDto?>
 {
-    private readonly IGradeHorarioRepository _repository;
+    private readonly IGradeHorariosRepository _repository;
 
-    public GetGradeHorarioByIdHandler(IGradeHorarioRepository repository)
+    public GetGradeHorariosByIdHandler(IGradeHorariosRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<GradeHorarioDto?> Handle(GetGradeHorarioByIdQuery request, CancellationToken cancellationToken)
+    public async Task<GradeHorariosDto?> Handle(GetGradeHorariosByIdQuery request, CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id);
 
-        return entity is null ? null : new GradeHorarioDto
+        return entity is null ? null : new GradeHorariosDto
         {
             Id = entity.Id,
             TurmaId = entity.TurmaId,

@@ -8,12 +8,12 @@ using Grade.Domain.Interfaces;
 
 namespace Grade.Tests.Handlers;
 
-public class UpdateGradeHorarioHandlerTests
+public class UpdateGradeHorariosHandlerTests
 {
     [Fact]
-    public async Task Handle_DeveAtualizarGradeHorario()
+    public async Task Handle_DeveAtualizarGradeHorarios()
     {
-        var grade = new GradeHorario
+        var grade = new GradeHorarios
         {
             Id = Guid.NewGuid(),
             TurmaId = Guid.NewGuid(),
@@ -25,12 +25,12 @@ public class UpdateGradeHorarioHandlerTests
             ProfessorId = Guid.NewGuid()
         };
 
-        var repo = new Mock<IGradeHorarioRepository>();
+        var repo = new Mock<IGradeHorariosRepository>();
         repo.Setup(r => r.GetByIdAsync(grade.Id)).ReturnsAsync(grade);
 
-        var handler = new UpdateGradeHorarioHandler(repo.Object);
+        var handler = new UpdateGradeHorariosHandler(repo.Object);
 
-        var command = new UpdateGradeHorarioCommand
+        var command = new UpdateGradeHorariosCommand
         {
             Id = grade.Id,
             TurmaId = grade.TurmaId,
@@ -52,12 +52,12 @@ public class UpdateGradeHorarioHandlerTests
     [Fact]
     public async Task Handle_DeveLancarExcecao_SeNaoEncontrado()
     {
-        var repo = new Mock<IGradeHorarioRepository>();
-        repo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((GradeHorario?)null);
+        var repo = new Mock<IGradeHorariosRepository>();
+        repo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((GradeHorarios?)null);
 
-        var handler = new UpdateGradeHorarioHandler(repo.Object);
+        var handler = new UpdateGradeHorariosHandler(repo.Object);
 
-        var command = new UpdateGradeHorarioCommand
+        var command = new UpdateGradeHorariosCommand
         {
             Id = Guid.NewGuid(),
             TurmaId = Guid.NewGuid(),

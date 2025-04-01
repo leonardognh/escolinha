@@ -2,11 +2,11 @@
 
 namespace Grade.Application.Commands;
 
-public class DeleteGradeHorarioCommand : IRequest
+public class DeleteGradeHorariosCommand : IRequest
 {
     public Guid Id { get; set; }
 
-    public DeleteGradeHorarioCommand(Guid id)
+    public DeleteGradeHorariosCommand(Guid id)
     {
         Id = id;
     }

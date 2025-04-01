@@ -2,7 +2,7 @@
 
 namespace Grade.Domain.Entities;
 
-public class GradeHorario
+public class GradeHorarios
 {
     public Guid Id { get; set; }
     public Guid TurmaId { get; set; }

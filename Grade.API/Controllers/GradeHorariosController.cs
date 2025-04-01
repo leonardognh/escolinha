@@ -11,11 +11,11 @@ namespace Grade.API.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class GradeHorarioController : ControllerBase
+public class GradeHorariosController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public GradeHorarioController(IMediator mediator)
+    public GradeHorariosController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -27,7 +27,7 @@ public class GradeHorarioController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] CreateGradeHorarioCommand command)
+    public async Task<IActionResult> Create([FromBody] CreateGradeHorariosCommand command)
     {
         var id = await _mediator.Send(command);
         return CreatedAtAction(nameof(GetById), new { id }, command);
@@ -38,11 +38,11 @@ public class GradeHorarioController : ControllerBase
     /// </summary>
     /// <param name="id">Identificador da grade horária.</param>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(GradeHorarioDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(GradeHorariosDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var result = await _mediator.Send(new GetGradeHorarioByIdQuery(id));
+        var result = await _mediator.Send(new GetGradeHorariosByIdQuery(id));
         return result is null ? NotFound() : Ok(result);
     }
 
@@ -52,10 +52,10 @@ public class GradeHorarioController : ControllerBase
     /// <param name="page">Número da página.</param>
     /// <param name="pageSize">Itens por página.</param>
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<GradeHorarioDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<GradeHorariosDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        var result = await _mediator.Send(new GetAllGradeHorariosQuery(page, pageSize));
+        var result = await _mediator.Send(new GetAllGradeHorariossQuery(page, pageSize));
         return Ok(result);
     }
 
@@ -67,7 +67,7 @@ public class GradeHorarioController : ControllerBase
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateGradeHorarioCommand command)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateGradeHorariosCommand command)
     {
         if (id != command.Id) return BadRequest();
         await _mediator.Send(command);
@@ -82,7 +82,7 @@ public class GradeHorarioController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Delete(Guid id)
     {
-        await _mediator.Send(new DeleteGradeHorarioCommand(id));
+        await _mediator.Send(new DeleteGradeHorariosCommand(id));
         return NoContent();
     }
 }

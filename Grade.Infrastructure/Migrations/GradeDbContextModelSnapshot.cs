@@ -40,7 +40,7 @@ namespace Grade.Infrastructure.Migrations
                     b.ToTable("AlunosProjecao", (string)null);
                 });
 
-            modelBuilder.Entity("Grade.Domain.Entities.GradeHorario", b =>
+            modelBuilder.Entity("Grade.Domain.Entities.GradeHorarios", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace Grade.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GradeHorarios", (string)null);
+                    b.ToTable("GradeHorarioss", (string)null);
                 });
 
             modelBuilder.Entity("Grade.Domain.Entities.MateriaProjecao", b =>

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Grade.Application.Commands;
 
-public class UpdateGradeHorarioCommand : IRequest
+public class UpdateGradeHorariosCommand : IRequest
 {
     public Guid Id { get; set; }
     public Guid TurmaId { get; set; }

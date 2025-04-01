@@ -30,7 +30,7 @@ Este projeto simula uma plataforma de gestão escolar para ensino médio, implem
 ### 3. `Grade.API`
 - CRUD da grade horária semanal
 - Consome eventos de Professores, Alunos, Turmas, Matérias
-- Publica eventos como: `GradeHorarioAtualizadaEvent`
+- Publica eventos como: `GradeHorariosAtualizadaEvent`
 
 ### 4. `Turmas.API`
 - CRUD de turmas

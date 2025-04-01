@@ -25,7 +25,7 @@ namespace Grade.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Grade.Domain.Entities.GradeHorario", b =>
+            modelBuilder.Entity("Grade.Domain.Entities.GradeHorarios", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,7 +54,7 @@ namespace Grade.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GradeHorarios", (string)null);
+                    b.ToTable("GradeHorarioss", (string)null);
                 });
 #pragma warning restore 612, 618
         }

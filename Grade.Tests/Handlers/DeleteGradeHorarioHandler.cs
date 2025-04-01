@@ -5,16 +5,16 @@ using Grade.Domain.Interfaces;
 
 namespace Grade.Tests.Handlers;
 
-public class DeleteGradeHorarioHandlerTests
+public class DeleteGradeHorariosHandlerTests
 {
     [Fact]
     public async Task Handle_DeveChamarDelete()
     {
-        var repo = new Mock<IGradeHorarioRepository>();
-        var handler = new DeleteGradeHorarioHandler(repo.Object);
+        var repo = new Mock<IGradeHorariosRepository>();
+        var handler = new DeleteGradeHorariosHandler(repo.Object);
 
         var id = Guid.NewGuid();
-        var command = new DeleteGradeHorarioCommand(id);
+        var command = new DeleteGradeHorariosCommand(id);
 
         await handler.Handle(command, CancellationToken.None);
 

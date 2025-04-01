@@ -4,16 +4,16 @@ using MediatR;
 
 namespace Grade.Application.Handlers;
 
-public class UpdateGradeHorarioHandler : IRequestHandler<UpdateGradeHorarioCommand>
+public class UpdateGradeHorariosHandler : IRequestHandler<UpdateGradeHorariosCommand>
 {
-    private readonly IGradeHorarioRepository _repository;
+    private readonly IGradeHorariosRepository _repository;
 
-    public UpdateGradeHorarioHandler(IGradeHorarioRepository repository)
+    public UpdateGradeHorariosHandler(IGradeHorariosRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<Unit> Handle(UpdateGradeHorarioCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateGradeHorariosCommand request, CancellationToken cancellationToken)
     {
         var entity = await _repository.GetByIdAsync(request.Id);
         if (entity is null)

@@ -5,22 +5,22 @@ using MediatR;
 
 namespace Grade.Application.Handlers;
 
-public class GetAllGradeHorariosHandler : IRequestHandler<GetAllGradeHorariosQuery, PaginatedResult<GradeHorarioDto>>
+public class GetAllGradeHorariossHandler : IRequestHandler<GetAllGradeHorariossQuery, PaginatedResult<GradeHorariosDto>>
 {
-    private readonly IGradeHorarioRepository _repository;
+    private readonly IGradeHorariosRepository _repository;
 
-    public GetAllGradeHorariosHandler(IGradeHorarioRepository repository)
+    public GetAllGradeHorariossHandler(IGradeHorariosRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<PaginatedResult<GradeHorarioDto>> Handle(GetAllGradeHorariosQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedResult<GradeHorariosDto>> Handle(GetAllGradeHorariossQuery request, CancellationToken cancellationToken)
     {
         var (data, total) = await _repository.GetPagedAsync(request.Page, request.PageSize);
 
-        return new PaginatedResult<GradeHorarioDto>
+        return new PaginatedResult<GradeHorariosDto>
         {
-            Items = data.Select(x => new GradeHorarioDto
+            Items = data.Select(x => new GradeHorariosDto
             {
                 Id = x.Id,
                 TurmaId = x.TurmaId,

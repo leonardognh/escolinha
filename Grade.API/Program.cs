@@ -74,10 +74,10 @@ builder.Services.AddMassTransit(x =>
 });
 
 // MediatR
-builder.Services.AddMediatR(typeof(CreateGradeHorarioCommand));
+builder.Services.AddMediatR(typeof(CreateGradeHorariosCommand));
 
 // Repositórios
-builder.Services.AddScoped<IGradeHorarioRepository, GradeHorarioRepository>();
+builder.Services.AddScoped<IGradeHorariosRepository, GradeHorariosRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
