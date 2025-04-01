@@ -45,7 +45,7 @@ public class GradeHorarioMateriaController : ControllerBase
     /// <returns>Detalhes da relação encontrada.</returns>
     /// <response code="200">Relação encontrada com sucesso.</response>
     /// <response code="404">Relação não encontrada.</response>
-    [HttpGet("{gradeHorarioId}/{materiaId}/{professorId}")]
+    [HttpGet("{gradeHorarioId}")]
     [ProducesResponseType(typeof(GradeHorarioMateriaDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid gradeHorarioId)
