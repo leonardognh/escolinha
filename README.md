@@ -2,6 +2,8 @@
 
 Este projeto simula uma aplicação escolar estruturada com .NET 9 em arquitetura de microserviços, mensageria com RabbitMQ, logs centralizados com Seq e gateway reverso com YARP.
 
+[Saiba Mais...](documentacao.md)
+
 ---
 
 ## 🐳 Inicialização com Docker
