@@ -11,11 +11,11 @@ namespace Alunos.API.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class AlunoController : ControllerBase
+public class AlunosController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public AlunoController(IMediator mediator)
+    public AlunosController(IMediator mediator)
     {
         _mediator = mediator;
     }
