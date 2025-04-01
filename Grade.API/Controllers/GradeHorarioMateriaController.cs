@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Grade.Application.Queries;
 using Grade.Application.DTOs;
-using System.Text.Json;
 
 namespace Grade.API.Controllers;
 
@@ -15,12 +14,10 @@ namespace Grade.API.Controllers;
 public class GradeHorarioMateriaController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly ILogger<GradeHorarioMateriaController> _logger;
 
-    public GradeHorarioMateriaController(IMediator mediator, ILogger<GradeHorarioMateriaController> logger)
+    public GradeHorarioMateriaController(IMediator mediator)
     {
         _mediator = mediator;
-        _logger = logger;
     }
 
     /// <summary>
@@ -64,10 +61,8 @@ public class GradeHorarioMateriaController : ControllerBase
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     public async Task<IActionResult> Create([FromBody] CreateGradeHorarioMateriaCommand command)
     {
-        _logger.LogInformation($"Creating new GradeHorarioMateria: {JsonSerializer.Serialize(command)}");
-        var id = await _mediator.Send(command);
-        _logger.LogInformation($"Created: {id}");
-        return CreatedAtAction(nameof(GetById), new { id }, command);
+        var gradeHorarioId = await _mediator.Send(command);
+        return Ok(command);
     }
 
     /// <summary>
