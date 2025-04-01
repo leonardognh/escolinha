@@ -22,10 +22,6 @@ public class UpdateGradeHorariosHandler : IRequestHandler<UpdateGradeHorariosCom
         entity.TurmaId = request.TurmaId;
         entity.Bimestre = request.Bimestre;
         entity.DiaSemana = request.DiaSemana;
-        entity.HorarioInicio = request.HorarioInicio;
-        entity.HorarioFim = request.HorarioFim;
-        entity.MateriaId = request.MateriaId;
-        entity.ProfessorId = request.ProfessorId;
 
         await _repository.UpdateAsync(entity);
         return Unit.Value;

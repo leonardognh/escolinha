@@ -24,14 +24,12 @@ public class CreateMateriaHandler : IRequestHandler<CreateMateriaCommand, Guid>
         {
             Id = Guid.NewGuid(),
             Nome = request.Nome,
-            Descricao = request.Descricao,
-            CargaHoraria = request.CargaHoraria
         };
 
         await _repository.AddAsync(materia);
 
         await _publish.Publish(new MateriaCriadaEvent(
-            materia.Id, materia.Nome, materia.Descricao, materia.CargaHoraria
+            materia.Id, materia.Nome
         ));
 
         return materia.Id;

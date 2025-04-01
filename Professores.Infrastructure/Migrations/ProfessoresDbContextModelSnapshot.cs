@@ -28,15 +28,8 @@ namespace Professores.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Telefone")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

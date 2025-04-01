@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Materias.Infrastructure.Migrations
 {
     [DbContext(typeof(MateriasDbContext))]
-    [Migration("20250331203730_Initial")]
-    partial class Initial
+    [Migration("20250401123845_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,12 +30,6 @@ namespace Materias.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<int?>("CargaHoraria")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("text");
 
                     b.Property<string>("Nome")
                         .IsRequired()

@@ -13,7 +13,7 @@ public class GetAlunoByIdHandlerTests
     public async Task Handle_DeveRetornarAluno()
     {
         var alunoId = Guid.NewGuid();
-        var aluno = new Aluno { Id = alunoId, Nome = "Aluno", Email = "aluno@email.com" };
+        var aluno = new Aluno { Id = alunoId, Nome = "Aluno" };
 
         var repo = new Mock<IAlunoRepository>();
         repo.Setup(r => r.GetByIdAsync(alunoId)).ReturnsAsync(aluno);

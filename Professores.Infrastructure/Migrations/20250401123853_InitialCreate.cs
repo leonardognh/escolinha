@@ -3,25 +3,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Grade.Infrastructure.Migrations
+namespace Professores.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddProfessoresProjecao : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ProfessoresProjecao",
+                name: "Professores",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Nome = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: true)
+                    Nome = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProfessoresProjecao", x => x.Id);
+                    table.PrimaryKey("PK_Professores", x => x.Id);
                 });
         }
 
@@ -29,7 +28,7 @@ namespace Grade.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProfessoresProjecao");
+                name: "Professores");
         }
     }
 }

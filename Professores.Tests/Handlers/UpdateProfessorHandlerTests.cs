@@ -13,7 +13,7 @@ public class UpdateProfessorHandlerTests
     [Fact]
     public async Task Handle_DeveAtualizarProfessorQuandoEncontrado()
     {
-        var professor = new Professor { Id = Guid.NewGuid(), Nome = "Old", Email = "old@email.com" };
+        var professor = new Professor { Id = Guid.NewGuid(), Nome = "Old" };
         var repositoryMock = new Mock<IProfessorRepository>();
         var publish = new Mock<IPublishEndpoint>();
 
@@ -25,8 +25,6 @@ public class UpdateProfessorHandlerTests
         {
             Id = professor.Id,
             Nome = "Novo",
-            Email = "novo@email.com",
-            Telefone = "11999999999"
         };
 
         await handler.Handle(command, CancellationToken.None);
@@ -49,7 +47,6 @@ public class UpdateProfessorHandlerTests
         {
             Id = Guid.NewGuid(),
             Nome = "Teste",
-            Email = "teste@email.com"
         };
 
         var act = async () => await handler.Handle(command, CancellationToken.None);

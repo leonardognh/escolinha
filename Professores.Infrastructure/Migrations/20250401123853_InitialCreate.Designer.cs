@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Turmas.Infrastructure.Persistence;
+using Professores.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Turmas.Infrastructure.Migrations
+namespace Professores.Infrastructure.Migrations
 {
-    [DbContext(typeof(TurmasDbContext))]
-    [Migration("20250331202647_Initial")]
-    partial class Initial
+    [DbContext(typeof(ProfessoresDbContext))]
+    [Migration("20250401123853_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,25 +25,19 @@ namespace Turmas.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Turmas.Domain.Entities.Turma", b =>
+            modelBuilder.Entity("Professores.Domain.Entities.Professor", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Ano")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Turno")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Turmas", (string)null);
+                    b.ToTable("Professores", (string)null);
                 });
 #pragma warning restore 612, 618
         }

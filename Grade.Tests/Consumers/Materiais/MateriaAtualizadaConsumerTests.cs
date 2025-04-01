@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using Grade.API.Consumers.Materias;
-using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
 using Contracts.Events.Materias;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Grade.Domain.Entities.Projecao;
 
 namespace Grade.Tests.Consumers.Materiais;
 
@@ -23,7 +23,7 @@ public class MateriaAtualizadaConsumerTests
             .BuildServiceProvider(true);
 
         var db = provider.GetRequiredService<GradeDbContext>();
-        db.MateriasProjecao.Add(new MateriaProjecao { Id = id, Nome = "Física", CargaHoraria = 40 });
+        db.MateriasProjecao.Add(new MateriaProjecao { Id = id, Nome = "Física" });
         await db.SaveChangesAsync();
 
         var harness = provider.GetRequiredService<ITestHarness>();
@@ -31,11 +31,10 @@ public class MateriaAtualizadaConsumerTests
 
         try
         {
-            await harness.Bus.Publish(new MateriaAtualizadaEvent(id, "Física Atualizada", "Nova descrição", 80));
+            await harness.Bus.Publish(new MateriaAtualizadaEvent(id, "Física Atualizada"));
 
             var materia = await db.MateriasProjecao.FindAsync(id);
             materia!.Nome.Should().Be("Física Atualizada");
-            materia.CargaHoraria.Should().Be(80);
         }
         finally
         {

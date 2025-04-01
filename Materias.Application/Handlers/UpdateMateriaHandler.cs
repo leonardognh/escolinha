@@ -23,13 +23,11 @@ public class UpdateMateriaHandler : IRequestHandler<UpdateMateriaCommand>
             ?? throw new Exception("Matéria não encontrada.");
 
         materia.Nome = request.Nome;
-        materia.Descricao = request.Descricao;
-        materia.CargaHoraria = request.CargaHoraria;
 
         await _repository.UpdateAsync(materia);
 
         await _publish.Publish(new MateriaAtualizadaEvent(
-            materia.Id, materia.Nome, materia.Descricao, materia.CargaHoraria
+            materia.Id, materia.Nome
         ));
 
         return Unit.Value;

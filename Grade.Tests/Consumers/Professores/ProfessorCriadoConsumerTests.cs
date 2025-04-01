@@ -30,9 +30,8 @@ public class ProfessorCriadoConsumerTests
         try
         {
             var eventToSend = new ProfessorCriadoEvent(
-                Id: Guid.NewGuid(),
-                Nome: "Fulano de Tal",
-                Email: "professor@email.com"
+                Guid.NewGuid(),
+                "Fulano de Tal"
             );
 
             await harness.Bus.Publish(eventToSend);

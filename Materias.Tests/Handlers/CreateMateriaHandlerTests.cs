@@ -21,8 +21,6 @@ public class CreateMateriaHandlerTests
         var command = new CreateMateriaCommand
         {
             Nome = "Matemática",
-            Descricao = "Básico",
-            CargaHoraria = 80
         };
 
         var result = await handler.Handle(command, default);

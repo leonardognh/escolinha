@@ -8,7 +8,7 @@ public class TurmaCriadaConsumer : IConsumer<TurmaCriadaEvent>
     public Task Consume(ConsumeContext<TurmaCriadaEvent> context)
     {
         var e = context.Message;
-        Console.WriteLine($"🟢 [Alunos] Nova Turma Criada: {e.Nome} ({e.Turno})");
+        Console.WriteLine($"🟢 [Alunos] Nova Turma Criada: {e.Nome}");
         return Task.CompletedTask;
     }
 }

@@ -24,8 +24,6 @@ public class GetAllAlunosHandler : IRequestHandler<GetAllAlunosQuery, PaginatedR
             {
                 Id = a.Id,
                 Nome = a.Nome,
-                Email = a.Email,
-                DataNascimento = a.DataNascimento,
                 TurmaId = a.TurmaId
             }),
             Page = request.Page,

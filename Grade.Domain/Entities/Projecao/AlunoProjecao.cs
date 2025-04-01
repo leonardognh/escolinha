@@ -1,4 +1,4 @@
-﻿namespace Grade.Domain.Entities;
+﻿namespace Grade.Domain.Entities.Projecao;
 
 public class AlunoProjecao
 {

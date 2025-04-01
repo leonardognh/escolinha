@@ -1,3 +1,4 @@
+using MassTransit;
 using Materias.Application.Commands;
 using Materias.Domain.Interfaces;
 using Materias.Infrastructure.Persistence;
@@ -19,6 +20,18 @@ builder.Host.UseSerilog();
 // DbContext
 builder.Services.AddDbContext<MateriasDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.Host(new Uri(builder.Configuration.GetConnectionString("RabbitMQ") ?? ""), "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+    });
+});
 
 // MediatR
 builder.Services.AddMediatR(typeof(CreateMateriaCommand));

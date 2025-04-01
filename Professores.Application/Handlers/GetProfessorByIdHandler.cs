@@ -22,8 +22,6 @@ public class GetProfessorByIdHandler : IRequestHandler<GetProfessorByIdQuery, Pr
         {
             Id = entity.Id,
             Nome = entity.Nome,
-            Email = entity.Email,
-            Telefone = entity.Telefone
         };
     }
 }

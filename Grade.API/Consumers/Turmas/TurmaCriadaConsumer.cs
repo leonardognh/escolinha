@@ -1,7 +1,7 @@
-﻿using Grade.Domain.Entities;
-using Grade.Infrastructure.Persistence;
+﻿using Grade.Infrastructure.Persistence;
 using Contracts.Events.Turmas;
 using MassTransit;
+using Grade.Domain.Entities.Projecao;
 
 namespace Grade.API.Consumers.Turmas;
 
@@ -26,7 +26,6 @@ public class TurmaCriadaConsumer : IConsumer<TurmaCriadaEvent>
             Id = e.Id,
             Nome = e.Nome,
             Ano = e.Ano,
-            Turno = e.Turno
         };
 
         _db.TurmasProjecao.Add(turma);

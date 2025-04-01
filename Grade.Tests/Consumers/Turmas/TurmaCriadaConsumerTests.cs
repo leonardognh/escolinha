@@ -24,7 +24,7 @@ public class TurmaCriadaConsumerTests
 
         try
         {
-            var evento = new TurmaCriadaEvent(Guid.NewGuid(), "1ºB", 1, "Tarde");
+            var evento = new TurmaCriadaEvent(Guid.NewGuid(), "1ºB", 1);
             await harness.Bus.Publish(evento);
 
             var db = provider.GetRequiredService<GradeDbContext>();
@@ -32,7 +32,6 @@ public class TurmaCriadaConsumerTests
 
             turma.Should().NotBeNull();
             turma!.Nome.Should().Be("1ºB");
-            turma.Turno.Should().Be("Tarde");
         }
         finally
         {

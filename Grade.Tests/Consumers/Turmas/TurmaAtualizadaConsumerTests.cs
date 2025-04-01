@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using Grade.API.Consumers.Turmas;
-using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
 using Contracts.Events.Turmas;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Grade.Domain.Entities.Projecao;
 
 namespace Grade.Tests.Consumers.Turmas;
 
@@ -23,7 +23,7 @@ public class TurmaAtualizadaConsumerTests
             .BuildServiceProvider(true);
 
         var db = provider.GetRequiredService<GradeDbContext>();
-        db.TurmasProjecao.Add(new TurmaProjecao { Id = id, Nome = "Antiga", Ano = 1, Turno = "Manhã" });
+        db.TurmasProjecao.Add(new TurmaProjecao { Id = id, Nome = "Antiga", Ano = 1 });
         await db.SaveChangesAsync();
 
         var harness = provider.GetRequiredService<ITestHarness>();
@@ -31,11 +31,10 @@ public class TurmaAtualizadaConsumerTests
 
         try
         {
-            await harness.Bus.Publish(new TurmaAtualizadaEvent(id, "Atualizada", 2, "Noite"));
+            await harness.Bus.Publish(new TurmaAtualizadaEvent(id, "Atualizada", 2));
 
             var turma = await db.TurmasProjecao.FindAsync(id);
             turma!.Nome.Should().Be("Atualizada");
-            turma.Turno.Should().Be("Noite");
         }
         finally
         {

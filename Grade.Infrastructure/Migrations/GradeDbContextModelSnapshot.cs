@@ -22,7 +22,47 @@ namespace Grade.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Grade.Domain.Entities.AlunoProjecao", b =>
+            modelBuilder.Entity("Grade.Domain.Entities.GradeHorario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Bimestre")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DiaSemana")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("TurmaId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GradeHorarios", (string)null);
+                });
+
+            modelBuilder.Entity("Grade.Domain.Entities.GradeHorarioMateria", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProfessorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("MateriaId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id", "ProfessorId", "MateriaId");
+
+                    b.HasIndex("MateriaId");
+
+                    b.HasIndex("ProfessorId");
+
+                    b.ToTable("GradeHorarioMaterias", (string)null);
+                });
+
+            modelBuilder.Entity("Grade.Domain.Entities.Projecao.AlunoProjecao", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,49 +80,11 @@ namespace Grade.Infrastructure.Migrations
                     b.ToTable("AlunosProjecao", (string)null);
                 });
 
-            modelBuilder.Entity("Grade.Domain.Entities.GradeHorarios", b =>
+            modelBuilder.Entity("Grade.Domain.Entities.Projecao.MateriaProjecao", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Bimestre")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("DiaSemana")
-                        .HasColumnType("integer");
-
-                    b.Property<TimeSpan>("HorarioFim")
-                        .HasColumnType("interval");
-
-                    b.Property<TimeSpan>("HorarioInicio")
-                        .HasColumnType("interval");
-
-                    b.Property<Guid>("MateriaId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProfessorId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("TurmaId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GradeHorarioss", (string)null);
-                });
-
-            modelBuilder.Entity("Grade.Domain.Entities.MateriaProjecao", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int?>("CargaHoraria")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("text");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -93,14 +95,11 @@ namespace Grade.Infrastructure.Migrations
                     b.ToTable("MateriasProjecao", (string)null);
                 });
 
-            modelBuilder.Entity("Grade.Domain.Entities.ProfessorProjecao", b =>
+            modelBuilder.Entity("Grade.Domain.Entities.Projecao.ProfessorProjecao", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -111,7 +110,7 @@ namespace Grade.Infrastructure.Migrations
                     b.ToTable("ProfessoresProjecao", (string)null);
                 });
 
-            modelBuilder.Entity("Grade.Domain.Entities.TurmaProjecao", b =>
+            modelBuilder.Entity("Grade.Domain.Entities.Projecao.TurmaProjecao", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,12 +123,41 @@ namespace Grade.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Turno")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.ToTable("TurmasProjecao", (string)null);
+                });
+
+            modelBuilder.Entity("Grade.Domain.Entities.GradeHorarioMateria", b =>
+                {
+                    b.HasOne("Grade.Domain.Entities.GradeHorario", "GradeHorario")
+                        .WithMany("Materias")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Grade.Domain.Entities.Projecao.MateriaProjecao", "Materia")
+                        .WithMany()
+                        .HasForeignKey("MateriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Grade.Domain.Entities.Projecao.ProfessorProjecao", "Professor")
+                        .WithMany()
+                        .HasForeignKey("ProfessorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GradeHorario");
+
+                    b.Navigation("Materia");
+
+                    b.Navigation("Professor");
+                });
+
+            modelBuilder.Entity("Grade.Domain.Entities.GradeHorario", b =>
+                {
+                    b.Navigation("Materias");
                 });
 #pragma warning restore 612, 618
         }

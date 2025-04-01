@@ -25,13 +25,12 @@ public class CreateTurmaHandler : IRequestHandler<CreateTurmaCommand, Guid>
             Id = Guid.NewGuid(),
             Nome = request.Nome,
             Ano = request.Ano,
-            Turno = request.Turno
         };
 
         await _repository.AddAsync(turma);
 
         await _publish.Publish(new TurmaCriadaEvent(
-            turma.Id, turma.Nome, turma.Ano, turma.Turno
+            turma.Id, turma.Nome, turma.Ano
         ));
 
         return turma.Id;

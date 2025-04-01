@@ -1,7 +1,7 @@
-﻿using Grade.Domain.Entities;
-using Grade.Infrastructure.Persistence;
+﻿using Grade.Infrastructure.Persistence;
 using Contracts.Events.Professores;
 using MassTransit;
+using Grade.Domain.Entities.Projecao;
 
 namespace Grade.API.Consumers.Professores;
 
@@ -25,7 +25,6 @@ public class ProfessorCriadoConsumer : IConsumer<ProfessorCriadoEvent>
         {
             Id = e.Id,
             Nome = e.Nome,
-            Email = e.Email
         };
 
         _db.ProfessoresProjecao.Add(proj);

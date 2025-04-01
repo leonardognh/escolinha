@@ -5,16 +5,16 @@ using MediatR;
 
 namespace Grade.Application.Handlers;
 
-public class GetAllGradeHorariossHandler : IRequestHandler<GetAllGradeHorariossQuery, PaginatedResult<GradeHorariosDto>>
+public class GetAllGradeHorariosHandler : IRequestHandler<GetAllGradeHorariosQuery, PaginatedResult<GradeHorariosDto>>
 {
     private readonly IGradeHorariosRepository _repository;
 
-    public GetAllGradeHorariossHandler(IGradeHorariosRepository repository)
+    public GetAllGradeHorariosHandler(IGradeHorariosRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<PaginatedResult<GradeHorariosDto>> Handle(GetAllGradeHorariossQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedResult<GradeHorariosDto>> Handle(GetAllGradeHorariosQuery request, CancellationToken cancellationToken)
     {
         var (data, total) = await _repository.GetPagedAsync(request.Page, request.PageSize);
 
@@ -26,10 +26,6 @@ public class GetAllGradeHorariossHandler : IRequestHandler<GetAllGradeHorariossQ
                 TurmaId = x.TurmaId,
                 Bimestre = x.Bimestre,
                 DiaSemana = x.DiaSemana,
-                HorarioInicio = x.HorarioInicio,
-                HorarioFim = x.HorarioFim,
-                MateriaId = x.MateriaId,
-                ProfessorId = x.ProfessorId
             }),
             Page = request.Page,
             PageSize = request.PageSize,

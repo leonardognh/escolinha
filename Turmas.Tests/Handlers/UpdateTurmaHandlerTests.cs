@@ -11,7 +11,7 @@ public class UpdateTurmaHandlerTests
     [Fact]
     public async Task Deve_Atualizar_Turma()
     {
-        var turma = new Turma { Id = Guid.NewGuid(), Nome = "Antiga", Ano = 1, Turno = "Manhã" };
+        var turma = new Turma { Id = Guid.NewGuid(), Nome = "Antiga", Ano = 1 };
         var repo = new Mock<ITurmaRepository>();
         var publish = new Mock<IPublishEndpoint>();
 
@@ -24,7 +24,6 @@ public class UpdateTurmaHandlerTests
             Id = turma.Id,
             Nome = "Nova",
             Ano = 2,
-            Turno = "Tarde"
         };
 
         await handler.Handle(command, CancellationToken.None);

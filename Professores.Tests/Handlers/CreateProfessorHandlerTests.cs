@@ -21,8 +21,6 @@ public class CreateProfessorHandlerTests
         var command = new CreateProfessorCommand
         {
             Nome = "Fulano",
-            Email = "fulano@email.com",
-            Telefone = "11999999999"
         };
 
         var result = await handler.Handle(command, CancellationToken.None);

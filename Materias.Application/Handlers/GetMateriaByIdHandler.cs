@@ -21,8 +21,6 @@ public class GetMateriaByIdHandler : IRequestHandler<GetMateriaByIdQuery, Materi
         {
             Id = materia.Id,
             Nome = materia.Nome,
-            Descricao = materia.Descricao,
-            CargaHoraria = materia.CargaHoraria
         };
     }
 }

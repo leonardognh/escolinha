@@ -24,8 +24,6 @@ public class GetAllProfessoresHandler : IRequestHandler<GetAllProfessoresQuery, 
             {
                 Id = p.Id,
                 Nome = p.Nome,
-                Email = p.Email,
-                Telefone = p.Telefone
             }),
             Page = request.Page,
             PageSize = request.PageSize,

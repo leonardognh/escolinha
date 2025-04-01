@@ -23,7 +23,7 @@ public class TurmaAtualizadaConsumerTests
 
         try
         {
-            var evento = new TurmaAtualizadaEvent(Guid.NewGuid(), "3ºB", 3, "Tarde");
+            var evento = new TurmaAtualizadaEvent(Guid.NewGuid(), "3ºB", 3);
             await harness.Bus.Publish(evento);
 
             var consumed = await harness.Consumed.Any<TurmaAtualizadaEvent>();

@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using Grade.API.Consumers.Alunos;
-using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
 using Contracts.Events.Alunos;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Grade.Domain.Entities.Projecao;
 
 namespace Grade.Tests.Consumers.Alunos;
 

@@ -22,8 +22,6 @@ public class CreateAlunoHandler : IRequestHandler<CreateAlunoCommand, Guid>
         {
             Id = Guid.NewGuid(),
             Nome = request.Nome,
-            Email = request.Email,
-            DataNascimento = request.DataNascimento,
             TurmaId = request.TurmaId
         };
 

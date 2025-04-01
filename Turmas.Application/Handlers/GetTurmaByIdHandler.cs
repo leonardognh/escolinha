@@ -22,7 +22,6 @@ public class GetTurmaByIdHandler : IRequestHandler<GetTurmaByIdQuery, TurmaDto?>
             Id = turma.Id,
             Nome = turma.Nome,
             Ano = turma.Ano,
-            Turno = turma.Turno
         };
     }
 }

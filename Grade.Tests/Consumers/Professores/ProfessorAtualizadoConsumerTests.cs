@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using Grade.API.Consumers.Professores;
-using Grade.Domain.Entities;
 using Grade.Infrastructure.Persistence;
 using Contracts.Events.Professores;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Grade.Domain.Entities.Projecao;
 
 namespace Grade.Tests.Consumers.Professores;
 
@@ -31,7 +31,6 @@ public class ProfessorAtualizadoConsumerTests
         {
             Id = professorId,
             Nome = "Antigo Nome",
-            Email = "professor@email.com"
         });
         await db.SaveChangesAsync();
 
@@ -40,7 +39,7 @@ public class ProfessorAtualizadoConsumerTests
 
         try
         {
-            var evento = new ProfessorAtualizadoEvent(professorId, "Novo Nome", "professor@email.com");
+            var evento = new ProfessorAtualizadoEvent(professorId, "Novo Nome");
 
             await harness.Bus.Publish(evento);
 
@@ -48,7 +47,6 @@ public class ProfessorAtualizadoConsumerTests
 
             professor.Should().NotBeNull();
             professor!.Nome.Should().Be("Novo Nome");
-            professor.Email.Should().Be("professor@email.com");
         }
         finally
         {

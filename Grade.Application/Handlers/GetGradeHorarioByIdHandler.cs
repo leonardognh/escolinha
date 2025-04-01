@@ -24,10 +24,6 @@ public class GetGradeHorariosByIdHandler : IRequestHandler<GetGradeHorariosByIdQ
             TurmaId = entity.TurmaId,
             Bimestre = entity.Bimestre,
             DiaSemana = entity.DiaSemana,
-            HorarioInicio = entity.HorarioInicio,
-            HorarioFim = entity.HorarioFim,
-            MateriaId = entity.MateriaId,
-            ProfessorId = entity.ProfessorId
         };
     }
 }

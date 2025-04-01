@@ -16,16 +16,12 @@ public class CreateGradeHorariosHandler : IRequestHandler<CreateGradeHorariosCom
 
     public async Task<Guid> Handle(CreateGradeHorariosCommand request, CancellationToken cancellationToken)
     {
-        var entity = new GradeHorarios
+        var entity = new GradeHorario
         {
             Id = Guid.NewGuid(),
             TurmaId = request.TurmaId,
             Bimestre = request.Bimestre,
             DiaSemana = request.DiaSemana,
-            HorarioInicio = request.HorarioInicio,
-            HorarioFim = request.HorarioFim,
-            MateriaId = request.MateriaId,
-            ProfessorId = request.ProfessorId
         };
 
         await _repository.AddAsync(entity);

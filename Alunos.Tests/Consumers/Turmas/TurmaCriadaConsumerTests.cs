@@ -23,7 +23,7 @@ public class TurmaCriadaConsumerTests
 
         try
         {
-            var evento = new TurmaCriadaEvent(Guid.NewGuid(), "3ºA", 3, "Manhã");
+            var evento = new TurmaCriadaEvent(Guid.NewGuid(), "3ºA", 3);
             await harness.Bus.Publish(evento);
 
             var consumed = await harness.Consumed.Any<TurmaCriadaEvent>();

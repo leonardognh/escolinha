@@ -21,15 +21,11 @@ public class CreateGradeHorariosHandlerTests
             TurmaId = Guid.NewGuid(),
             Bimestre = 1,
             DiaSemana = DiaSemana.Quarta,
-            HorarioInicio = new TimeSpan(8, 0, 0),
-            HorarioFim = new TimeSpan(9, 0, 0),
-            MateriaId = Guid.NewGuid(),
-            ProfessorId = Guid.NewGuid()
         };
 
         var result = await handler.Handle(command, CancellationToken.None);
 
         result.Should().NotBeEmpty();
-        repo.Verify(r => r.AddAsync(It.IsAny<GradeHorarios>()), Times.Once);
+        repo.Verify(r => r.AddAsync(It.IsAny<GradeHorario>()), Times.Once);
     }
 }

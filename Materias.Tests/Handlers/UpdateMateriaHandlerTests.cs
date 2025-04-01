@@ -15,8 +15,6 @@ public class UpdateMateriaHandlerTests
         {
             Id = Guid.NewGuid(),
             Nome = "Antiga",
-            Descricao = "Descrição antiga",
-            CargaHoraria = 60
         };
 
         var repo = new Mock<IMateriaRepository>();
@@ -30,14 +28,11 @@ public class UpdateMateriaHandlerTests
         {
             Id = materia.Id,
             Nome = "Nova",
-            Descricao = "Nova descrição",
-            CargaHoraria = 100
         };
 
         await handler.Handle(command, default);
 
         materia.Nome.Should().Be("Nova");
-        materia.CargaHoraria.Should().Be(100);
         repo.Verify(r => r.UpdateAsync(materia), Times.Once);
     }
 }

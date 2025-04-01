@@ -22,7 +22,6 @@ public class ProfessorAtualizadoConsumer : IConsumer<ProfessorAtualizadoEvent>
         if (professor is null) return;
 
         professor.Nome = e.Nome;
-        professor.Email = e.Email;
 
         await _db.SaveChangesAsync();
     }

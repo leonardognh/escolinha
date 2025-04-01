@@ -24,8 +24,6 @@ public class GetAllMateriasHandler : IRequestHandler<GetAllMateriasQuery, Pagina
             {
                 Id = x.Id,
                 Nome = x.Nome,
-                Descricao = x.Descricao,
-                CargaHoraria = x.CargaHoraria
             }),
             Page = request.Page,
             PageSize = request.PageSize,

@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Grade.Infrastructure.Migrations
+namespace Alunos.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAlunosProjecao : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AlunosProjecao",
+                name: "Alunos",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -21,7 +21,7 @@ namespace Grade.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AlunosProjecao", x => x.Id);
+                    table.PrimaryKey("PK_Alunos", x => x.Id);
                 });
         }
 
@@ -29,7 +29,7 @@ namespace Grade.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AlunosProjecao");
+                name: "Alunos");
         }
     }
 }

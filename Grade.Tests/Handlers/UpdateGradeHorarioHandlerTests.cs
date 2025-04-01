@@ -13,16 +13,12 @@ public class UpdateGradeHorariosHandlerTests
     [Fact]
     public async Task Handle_DeveAtualizarGradeHorarios()
     {
-        var grade = new GradeHorarios
+        var grade = new GradeHorario
         {
             Id = Guid.NewGuid(),
             TurmaId = Guid.NewGuid(),
             Bimestre = 1,
             DiaSemana = DiaSemana.Segunda,
-            HorarioInicio = TimeSpan.FromHours(8),
-            HorarioFim = TimeSpan.FromHours(9),
-            MateriaId = Guid.NewGuid(),
-            ProfessorId = Guid.NewGuid()
         };
 
         var repo = new Mock<IGradeHorariosRepository>();
@@ -36,10 +32,6 @@ public class UpdateGradeHorariosHandlerTests
             TurmaId = grade.TurmaId,
             Bimestre = 2,
             DiaSemana = DiaSemana.Quinta,
-            HorarioInicio = TimeSpan.FromHours(10),
-            HorarioFim = TimeSpan.FromHours(11),
-            MateriaId = Guid.NewGuid(),
-            ProfessorId = Guid.NewGuid()
         };
 
         await handler.Handle(command, CancellationToken.None);
@@ -53,7 +45,7 @@ public class UpdateGradeHorariosHandlerTests
     public async Task Handle_DeveLancarExcecao_SeNaoEncontrado()
     {
         var repo = new Mock<IGradeHorariosRepository>();
-        repo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((GradeHorarios?)null);
+        repo.Setup(r => r.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync((GradeHorario?)null);
 
         var handler = new UpdateGradeHorariosHandler(repo.Object);
 
@@ -63,10 +55,6 @@ public class UpdateGradeHorariosHandlerTests
             TurmaId = Guid.NewGuid(),
             Bimestre = 1,
             DiaSemana = DiaSemana.Terca,
-            HorarioInicio = TimeSpan.FromHours(8),
-            HorarioFim = TimeSpan.FromHours(9),
-            MateriaId = Guid.NewGuid(),
-            ProfessorId = Guid.NewGuid()
         };
 
         var act = async () => await handler.Handle(command, CancellationToken.None);

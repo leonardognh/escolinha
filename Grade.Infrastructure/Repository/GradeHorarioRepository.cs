@@ -14,16 +14,15 @@ public class GradeHorariosRepository : IGradeHorariosRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<GradeHorarios>> GetAllAsync() =>
-        await _context.GradeHorarioss.ToListAsync();
+    public async Task<IEnumerable<GradeHorario>> GetAllAsync() =>
+        await _context.GradeHorarios.ToListAsync();
 
-    public async Task<(IEnumerable<GradeHorarios> Data, int Total)> GetPagedAsync(int page, int pageSize)
+    public async Task<(IEnumerable<GradeHorario> Data, int Total)> GetPagedAsync(int page, int pageSize)
     {
-        var query = _context.GradeHorarioss.AsQueryable();
+        var query = _context.GradeHorarios.AsQueryable();
         var total = await query.CountAsync();
         var data = await query
             .OrderBy(g => g.DiaSemana)
-            .ThenBy(g => g.HorarioInicio)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
@@ -31,27 +30,27 @@ public class GradeHorariosRepository : IGradeHorariosRepository
         return (data, total);
     }
 
-    public async Task<GradeHorarios?> GetByIdAsync(Guid id) =>
-        await _context.GradeHorarioss.FindAsync(id);
+    public async Task<GradeHorario?> GetByIdAsync(Guid id) =>
+        await _context.GradeHorarios.FindAsync(id);
 
-    public async Task AddAsync(GradeHorarios grade)
+    public async Task AddAsync(GradeHorario grade)
     {
-        _context.GradeHorarioss.Add(grade);
+        _context.GradeHorarios.Add(grade);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(GradeHorarios grade)
+    public async Task UpdateAsync(GradeHorario grade)
     {
-        _context.GradeHorarioss.Update(grade);
+        _context.GradeHorarios.Update(grade);
         await _context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(Guid id)
     {
-        var grade = await _context.GradeHorarioss.FindAsync(id);
+        var grade = await _context.GradeHorarios.FindAsync(id);
         if (grade is not null)
         {
-            _context.GradeHorarioss.Remove(grade);
+            _context.GradeHorarios.Remove(grade);
             await _context.SaveChangesAsync();
         }
     }

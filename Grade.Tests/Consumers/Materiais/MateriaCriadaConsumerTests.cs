@@ -23,7 +23,7 @@ public class MateriaCriadaConsumerTests
 
         try
         {
-            var evento = new MateriaCriadaEvent(Guid.NewGuid(), "Biologia", "Área de ciências", 60);
+            var evento = new MateriaCriadaEvent(Guid.NewGuid(), "Biologia");
             await harness.Bus.Publish(evento);
 
             var db = provider.GetRequiredService<GradeDbContext>();

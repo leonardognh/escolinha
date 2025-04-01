@@ -22,7 +22,6 @@ public class CreateProfessorHandler : IRequestHandler<CreateProfessorCommand, Gu
         {
             Id = Guid.NewGuid(),
             Nome = request.Nome,
-            Email = request.Email
         };
 
         await _repository.AddAsync(professor);
@@ -30,8 +29,7 @@ public class CreateProfessorHandler : IRequestHandler<CreateProfessorCommand, Gu
         // 🟢 Publica o evento
         await _publish.Publish(new ProfessorCriadoEvent(
             professor.Id,
-            professor.Nome,
-            professor.Email
+            professor.Nome
         ));
 
         return professor.Id;

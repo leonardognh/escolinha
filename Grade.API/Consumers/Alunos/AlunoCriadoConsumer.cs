@@ -1,7 +1,7 @@
-﻿using Grade.Domain.Entities;
-using Grade.Infrastructure.Persistence;
+﻿using Grade.Infrastructure.Persistence;
 using Contracts.Events.Alunos;
 using MassTransit;
+using Grade.Domain.Entities.Projecao;
 
 namespace Grade.API.Consumers.Alunos;
 

@@ -23,7 +23,6 @@ public class TurmaAtualizadaConsumer : IConsumer<TurmaAtualizadaEvent>
 
         turma.Nome = e.Nome;
         turma.Ano = e.Ano;
-        turma.Turno = e.Turno;
 
         await _db.SaveChangesAsync();
     }

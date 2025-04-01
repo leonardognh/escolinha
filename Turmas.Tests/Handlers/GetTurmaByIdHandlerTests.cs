@@ -10,7 +10,7 @@ public class GetTurmaByIdHandlerTests
     [Fact]
     public async Task Deve_Retornar_TurmaDto()
     {
-        var turma = new Turma { Id = Guid.NewGuid(), Nome = "2ºB", Ano = 2, Turno = "Tarde" };
+        var turma = new Turma { Id = Guid.NewGuid(), Nome = "2ºB", Ano = 2 };
         var repo = new Mock<ITurmaRepository>();
         repo.Setup(r => r.GetByIdAsync(turma.Id)).ReturnsAsync(turma);
 

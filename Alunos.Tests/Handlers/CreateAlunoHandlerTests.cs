@@ -20,8 +20,6 @@ public class CreateAlunoHandlerTests
         var command = new CreateAlunoCommand
         {
             Nome = "Aluno",
-            Email = "aluno@email.com",
-            DataNascimento = new DateTime(2005, 5, 1),
             TurmaId = Guid.NewGuid()
         };
 

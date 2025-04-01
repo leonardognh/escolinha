@@ -21,15 +21,13 @@ public class UpdateProfessorHandler : IRequestHandler<UpdateProfessorCommand>
             ?? throw new Exception("Professor não encontrado.");
 
         professor.Nome = request.Nome;
-        professor.Email = request.Email;
 
         await _repository.UpdateAsync(professor);
 
         // 🟢 Publica o evento de atualização
         await _publish.Publish(new ProfessorAtualizadoEvent(
             professor.Id,
-            professor.Nome,
-            professor.Email
+            professor.Nome
         ));
 
         return Unit.Value;

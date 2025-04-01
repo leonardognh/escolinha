@@ -35,9 +35,6 @@ namespace Turmas.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Turno")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.ToTable("Turmas", (string)null);

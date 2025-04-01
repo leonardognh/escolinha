@@ -24,12 +24,11 @@ public class UpdateTurmaHandler : IRequestHandler<UpdateTurmaCommand>
 
         turma.Nome = request.Nome;
         turma.Ano = request.Ano;
-        turma.Turno = request.Turno;
 
         await _repository.UpdateAsync(turma);
 
         await _publish.Publish(new TurmaAtualizadaEvent(
-            turma.Id, turma.Nome, turma.Ano, turma.Turno
+            turma.Id, turma.Nome, turma.Ano
         ));
 
         return Unit.Value;

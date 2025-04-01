@@ -14,16 +14,12 @@ public class GetGradeHorariosByIdHandlerTests
     public async Task Handle_DeveRetornarGrade()
     {
         var id = Guid.NewGuid();
-        var grade = new GradeHorarios
+        var grade = new GradeHorario
         {
             Id = id,
             TurmaId = Guid.NewGuid(),
             Bimestre = 1,
             DiaSemana = DiaSemana.Quarta,
-            HorarioInicio = TimeSpan.FromHours(8),
-            HorarioFim = TimeSpan.FromHours(9),
-            MateriaId = Guid.NewGuid(),
-            ProfessorId = Guid.NewGuid()
         };
 
         var repo = new Mock<IGradeHorariosRepository>();

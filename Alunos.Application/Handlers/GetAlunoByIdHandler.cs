@@ -21,8 +21,6 @@ public class GetAlunoByIdHandler : IRequestHandler<GetAlunoByIdQuery, AlunoDto?>
         {
             Id = aluno.Id,
             Nome = aluno.Nome,
-            Email = aluno.Email,
-            DataNascimento = aluno.DataNascimento,
             TurmaId = aluno.TurmaId
         };
     }

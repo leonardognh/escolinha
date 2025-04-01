@@ -17,7 +17,7 @@ public class GetAllProfessoresHandlerTests
         repositoryMock.Setup(r => r.GetPagedAsync(1, 10))
             .ReturnsAsync((new List<Professor>
             {
-                new() { Id = Guid.NewGuid(), Nome = "Professor", Email = "professor@email.com" }
+                new() { Id = Guid.NewGuid(), Nome = "Professor" }
             }, 1));
 
         var handler = new GetAllProfessoresHandler(repositoryMock.Object);

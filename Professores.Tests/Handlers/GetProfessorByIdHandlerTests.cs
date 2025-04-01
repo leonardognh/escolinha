@@ -16,7 +16,7 @@ public class GetProfessorByIdHandlerTests
         var professorId = Guid.NewGuid();
         var repositoryMock = new Mock<IProfessorRepository>();
         repositoryMock.Setup(r => r.GetByIdAsync(professorId))
-            .ReturnsAsync(new Professor { Id = professorId, Nome = "Ana", Email = "ana@email.com" });
+            .ReturnsAsync(new Professor { Id = professorId, Nome = "Ana" });
 
         var handler = new GetProfessorByIdHandler(repositoryMock.Object);
 

@@ -13,7 +13,7 @@ public class UpdateAlunoHandlerTests
     [Fact]
     public async Task Handle_DeveAtualizarAluno()
     {
-        var aluno = new Aluno { Id = Guid.NewGuid(), Nome = "Antigo", Email = "antigo@email.com" };
+        var aluno = new Aluno { Id = Guid.NewGuid(), Nome = "Antigo" };
         var repositoryMock = new Mock<IAlunoRepository>();
         var publish = new Mock<IPublishEndpoint>();
 
@@ -25,8 +25,6 @@ public class UpdateAlunoHandlerTests
         {
             Id = aluno.Id,
             Nome = "Novo",
-            Email = "novo@email.com",
-            DataNascimento = DateTime.Today,
             TurmaId = Guid.NewGuid()
         };
 
@@ -50,8 +48,6 @@ public class UpdateAlunoHandlerTests
         {
             Id = Guid.NewGuid(),
             Nome = "Teste",
-            Email = "teste@email.com",
-            DataNascimento = DateTime.Today,
             TurmaId = Guid.NewGuid()
         };
 

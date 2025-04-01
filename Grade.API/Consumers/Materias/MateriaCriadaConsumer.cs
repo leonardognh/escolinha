@@ -1,35 +1,28 @@
-﻿using Grade.Domain.Entities;
+﻿using Contracts.Events.Materias;
+using Grade.Domain.Entities.Projecao;
 using Grade.Infrastructure.Persistence;
-using Contracts.Events.Materias;
 using MassTransit;
 
 namespace Grade.API.Consumers.Materias;
 
 public class MateriaCriadaConsumer : IConsumer<MateriaCriadaEvent>
 {
-    private readonly GradeDbContext _db;
+    private readonly GradeDbContext _context;
 
-    public MateriaCriadaConsumer(GradeDbContext db)
+    public MateriaCriadaConsumer(GradeDbContext context)
     {
-        _db = db;
+        _context = context;
     }
 
     public async Task Consume(ConsumeContext<MateriaCriadaEvent> context)
     {
-        var e = context.Message;
-
-        var exists = await _db.MateriasProjecao.FindAsync(e.Id);
-        if (exists is not null) return;
-
         var materia = new MateriaProjecao
         {
-            Id = e.Id,
-            Nome = e.Nome,
-            Descricao = e.Descricao,
-            CargaHoraria = e.CargaHoraria
+            Id = context.Message.Id,
+            Nome = context.Message.Nome,
         };
 
-        _db.MateriasProjecao.Add(materia);
-        await _db.SaveChangesAsync();
+        _context.MateriasProjecao.Add(materia);
+        await _context.SaveChangesAsync();
     }
 }

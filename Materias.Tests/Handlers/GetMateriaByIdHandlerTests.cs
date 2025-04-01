@@ -14,8 +14,6 @@ public class GetMateriaByIdHandlerTests
         {
             Id = Guid.NewGuid(),
             Nome = "Física",
-            Descricao = "Avançada",
-            CargaHoraria = 120
         };
 
         var repo = new Mock<IMateriaRepository>();

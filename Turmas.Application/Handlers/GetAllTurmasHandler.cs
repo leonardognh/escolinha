@@ -25,7 +25,6 @@ public class GetAllTurmasHandler : IRequestHandler<GetAllTurmasQuery, PaginatedR
                 Id = x.Id,
                 Nome = x.Nome,
                 Ano = x.Ano,
-                Turno = x.Turno
             }),
             Page = request.Page,
             PageSize = request.PageSize,

@@ -23,8 +23,6 @@ public class UpdateAlunoHandler : IRequestHandler<UpdateAlunoCommand>
         var turmaAnteriorId = aluno.TurmaId;
 
         aluno.Nome = request.Nome;
-        aluno.Email = request.Email;
-        aluno.DataNascimento = request.DataNascimento;
         aluno.TurmaId = request.TurmaId;
 
         await _repository.UpdateAsync(aluno);

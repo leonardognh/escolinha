@@ -16,7 +16,7 @@ public class GetAllAlunosHandlerTests
         repo.Setup(r => r.GetPagedAsync(1, 10)).ReturnsAsync((
             new List<Aluno>
             {
-                new Aluno { Id = Guid.NewGuid(), Nome = "Aluno", Email = "aluno@email.com" }
+                new Aluno { Id = Guid.NewGuid(), Nome = "Aluno" }
             }, 1));
 
         var handler = new GetAllAlunosHandler(repo.Object);

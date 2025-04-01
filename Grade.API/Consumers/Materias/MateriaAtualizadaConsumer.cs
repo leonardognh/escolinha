@@ -1,5 +1,5 @@
-﻿using Grade.Infrastructure.Persistence;
-using Contracts.Events.Materias;
+﻿using Contracts.Events.Materias;
+using Grade.Infrastructure.Persistence;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,24 +7,22 @@ namespace Grade.API.Consumers.Materias;
 
 public class MateriaAtualizadaConsumer : IConsumer<MateriaAtualizadaEvent>
 {
-    private readonly GradeDbContext _db;
+    private readonly GradeDbContext _context;
 
-    public MateriaAtualizadaConsumer(GradeDbContext db)
+    public MateriaAtualizadaConsumer(GradeDbContext context)
     {
-        _db = db;
+        _context = context;
     }
 
     public async Task Consume(ConsumeContext<MateriaAtualizadaEvent> context)
     {
-        var e = context.Message;
+        var materia = await _context.MateriasProjecao
+            .FirstOrDefaultAsync(m => m.Id == context.Message.Id);
 
-        var materia = await _db.MateriasProjecao.FirstOrDefaultAsync(m => m.Id == e.Id);
-        if (materia is null) return;
-
-        materia.Nome = e.Nome;
-        materia.Descricao = e.Descricao;
-        materia.CargaHoraria = e.CargaHoraria;
-
-        await _db.SaveChangesAsync();
+        if (materia is not null)
+        {
+            materia.Nome = context.Message.Nome;
+            await _context.SaveChangesAsync();
+        }
     }
 }

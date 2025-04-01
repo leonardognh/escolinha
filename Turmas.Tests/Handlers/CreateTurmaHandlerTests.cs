@@ -23,7 +23,6 @@ public class CreateTurmaHandlerTests
         {
             Nome = "1ºA",
             Ano = 1,
-            Turno = "Manhã"
         };
 
         // Act
