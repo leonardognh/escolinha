@@ -88,7 +88,6 @@ builder.Services.AddOpenApi();
 builder.WebHost.UseUrls("http://*:80");
 
 var app = builder.Build();
-
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<GradeDbContext>();
@@ -101,6 +100,8 @@ app.MapScalarApiReference(o =>
 {
     o.WithTheme(ScalarTheme.Moon);
 });
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

@@ -71,6 +71,8 @@ app.MapScalarApiReference(o =>
     o.WithTheme(ScalarTheme.Moon);
 });
 
+app.UseSerilogRequestLogging();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

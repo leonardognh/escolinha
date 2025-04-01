@@ -44,7 +44,7 @@ namespace Grade.Infrastructure.Migrations
 
             modelBuilder.Entity("Grade.Domain.Entities.GradeHorarioMateria", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("GradeHorarioId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("ProfessorId")
@@ -53,7 +53,12 @@ namespace Grade.Infrastructure.Migrations
                     b.Property<Guid>("MateriaId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id", "ProfessorId", "MateriaId");
+                    b.Property<Guid?>("GradeHorarioId1")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("GradeHorarioId", "ProfessorId", "MateriaId");
+
+                    b.HasIndex("GradeHorarioId1");
 
                     b.HasIndex("MateriaId");
 
@@ -131,10 +136,14 @@ namespace Grade.Infrastructure.Migrations
             modelBuilder.Entity("Grade.Domain.Entities.GradeHorarioMateria", b =>
                 {
                     b.HasOne("Grade.Domain.Entities.GradeHorario", "GradeHorario")
-                        .WithMany("Materias")
-                        .HasForeignKey("Id")
+                        .WithMany()
+                        .HasForeignKey("GradeHorarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Grade.Domain.Entities.GradeHorario", null)
+                        .WithMany("Materias")
+                        .HasForeignKey("GradeHorarioId1");
 
                     b.HasOne("Grade.Domain.Entities.Projecao.MateriaProjecao", "Materia")
                         .WithMany()
