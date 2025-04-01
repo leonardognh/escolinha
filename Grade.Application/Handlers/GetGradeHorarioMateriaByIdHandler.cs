@@ -16,11 +16,11 @@ public class GetGradeHorarioMateriaByIdHandler : IRequestHandler<GetGradeHorario
 
     public async Task<GradeHorarioMateriaDto?> Handle(GetGradeHorarioMateriaByIdQuery request, CancellationToken cancellationToken)
     {
-        var entity = await _repository.GetByIdAsync(request.Id);
+        var entity = await _repository.GetByIdAsync(request.GradeHorarioId);
 
         return entity is null ? null : new GradeHorarioMateriaDto
         {
-            Id = entity.Id,
+            GradeHorarioId = entity.GradeHorarioId,
             MateriaId = entity.MateriaId,
             ProfessorId = entity.ProfessorId,
         };

@@ -21,13 +21,22 @@ public class GradeDbContext : DbContext
         modelBuilder.Entity<GradeHorario>().ToTable("GradeHorarios");
 
         modelBuilder.Entity<GradeHorarioMateria>().ToTable("GradeHorarioMaterias")
-            .HasKey(x => new { x.Id, x.ProfessorId, x.MateriaId });
-
+            .HasKey(x => new { x.GradeHorarioId, x.ProfessorId, x.MateriaId });
 
         modelBuilder.Entity<GradeHorarioMateria>()
-            .HasOne(x => x.GradeHorario)
-            .WithMany(x => x.Materias)
-            .HasForeignKey(x => x.Id);
+            .HasOne(g => g.GradeHorario)
+            .WithMany() 
+            .HasForeignKey(g => g.GradeHorarioId);
+
+        modelBuilder.Entity<GradeHorarioMateria>()
+            .HasOne(g => g.Materia)
+            .WithMany()
+            .HasForeignKey(g => g.MateriaId);
+
+        modelBuilder.Entity<GradeHorarioMateria>()
+            .HasOne(g => g.Professor)
+            .WithMany() 
+            .HasForeignKey(g => g.ProfessorId);
 
         modelBuilder.Entity<ProfessorProjecao>().ToTable("ProfessoresProjecao");
         modelBuilder.Entity<AlunoProjecao>().ToTable("AlunosProjecao");

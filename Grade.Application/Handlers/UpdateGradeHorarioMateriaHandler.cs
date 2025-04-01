@@ -15,7 +15,7 @@ public class UpdateGradeHorarioMateriaHandler : IRequestHandler<UpdateGradeHorar
 
     public async Task<Unit> Handle(UpdateGradeHorarioMateriaCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _repository.GetByIdAsync(request.Id);
+        var entity = await _repository.GetByIdAsync(request.GradeHorarioId);
         if (entity is null)
             throw new Exception("GradeHoraro Materia não encontrada.");
 

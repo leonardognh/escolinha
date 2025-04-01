@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Grade.Application.Queries;
 using Grade.Application.DTOs;
+using System.Text.Json;
 
 namespace Grade.API.Controllers;
 
@@ -14,10 +15,12 @@ namespace Grade.API.Controllers;
 public class GradeHorarioMateriaController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<GradeHorarioMateriaController> _logger;
 
-    public GradeHorarioMateriaController(IMediator mediator)
+    public GradeHorarioMateriaController(IMediator mediator, ILogger<GradeHorarioMateriaController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     /// <summary>
@@ -38,16 +41,16 @@ public class GradeHorarioMateriaController : ControllerBase
     /// <summary>
     /// Obtém uma relação específica entre GradeHorário e Matéria pelo ID.
     /// </summary>
-    /// <param name="id">ID da relação.</param>
+    /// <param name="gradeHorarioId">ID da grade.</param>
     /// <returns>Detalhes da relação encontrada.</returns>
     /// <response code="200">Relação encontrada com sucesso.</response>
     /// <response code="404">Relação não encontrada.</response>
-    [HttpGet("{id}")]
+    [HttpGet("{gradeHorarioId}/{materiaId}/{professorId}")]
     [ProducesResponseType(typeof(GradeHorarioMateriaDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid gradeHorarioId)
     {
-        var result = await _mediator.Send(new GetGradeHorarioMateriaByIdQuery(id));
+        var result = await _mediator.Send(new GetGradeHorarioMateriaByIdQuery(gradeHorarioId));
         return result is null ? NotFound() : Ok(result);
     }
 
@@ -61,7 +64,9 @@ public class GradeHorarioMateriaController : ControllerBase
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     public async Task<IActionResult> Create([FromBody] CreateGradeHorarioMateriaCommand command)
     {
+        _logger.LogInformation($"Creating new GradeHorarioMateria: {JsonSerializer.Serialize(command)}");
         var id = await _mediator.Send(command);
+        _logger.LogInformation($"Created: {id}");
         return CreatedAtAction(nameof(GetById), new { id }, command);
     }
 
@@ -78,7 +83,7 @@ public class GradeHorarioMateriaController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateGradeHorarioMateriaCommand command)
     {
-        if (id != command.Id) return BadRequest();
+        if (id != command.GradeHorarioId) return BadRequest();
         await _mediator.Send(command);
         return NoContent();
     }

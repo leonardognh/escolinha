@@ -22,7 +22,7 @@ public class GetAllGradeHorarioMateriasHandler : IRequestHandler<GetAllGradeHora
         {
             Items = data.Select(x => new GradeHorarioMateriaDto
             {
-                Id = x.Id,
+                GradeHorarioId = x.GradeHorarioId,
                 MateriaId = x.MateriaId,
                 ProfessorId = x.ProfessorId,
             }),

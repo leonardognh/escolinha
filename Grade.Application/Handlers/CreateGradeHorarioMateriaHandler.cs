@@ -17,11 +17,12 @@ public class CreateGradeHorarioMateriaHandler : IRequestHandler<CreateGradeHorar
     {
         var entity = new GradeHorarioMateria
         {
-            Id = Guid.NewGuid(),
+            GradeHorarioId = request.GradeHorarioId,
             MateriaId = request.MateriaId,
+            ProfessorId = request.ProfessorId,
         };
 
         await _repository.AddAsync(entity);
-        return entity.Id;
+        return entity.GradeHorarioId;
     }
 }
