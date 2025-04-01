@@ -13,6 +13,11 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - escola-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -48,6 +53,9 @@ services:
     container_name: professores-api
     ports:
       - "5001:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
       - escola-network
 
@@ -58,6 +66,9 @@ services:
     container_name: alunos-api
     ports:
       - "5003:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
       - escola-network
 
@@ -68,6 +79,9 @@ services:
     container_name: grade-api
     ports:
       - "5005:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
       - escola-network
 
@@ -78,6 +92,9 @@ services:
     container_name: turmas-api
     ports:
       - "5007:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
       - escola-network
 
@@ -88,6 +105,9 @@ services:
     container_name: materias-api
     ports:
       - "5009:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
       - escola-network
 

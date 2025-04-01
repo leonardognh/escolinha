@@ -25,7 +25,7 @@ builder.Services.AddMassTransit(x =>
 {
     x.UsingRabbitMq((ctx, cfg) =>
     {
-        cfg.Host("localhost", "/", h =>
+        cfg.Host(new Uri(builder.Configuration.GetConnectionString("RabbitMQ")), "/", h =>
         {
             h.Username("guest");
             h.Password("guest");
@@ -51,15 +51,12 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.MapOpenApi();
+
+app.MapScalarApiReference(o =>
 {
-    app.MapOpenApi();
-    app.MapScalarApiReference(o =>
-    {
-        o.WithTheme(ScalarTheme.Moon);
-    });
-}
+    o.WithTheme(ScalarTheme.Moon);
+});
 
 app.UseHttpsRedirection();
 

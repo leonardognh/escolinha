@@ -37,15 +37,12 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.MapOpenApi();
+
+app.MapScalarApiReference(o =>
 {
-    app.MapOpenApi();
-    app.MapScalarApiReference(o =>
-    {
-        o.WithTheme(ScalarTheme.Moon);
-    });
-}
+    o.WithTheme(ScalarTheme.Moon);
+});
 
 app.UseHttpsRedirection();
 
