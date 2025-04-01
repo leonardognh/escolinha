@@ -67,7 +67,7 @@ Exemplos de requisições ao gateway:
 ```bash
 GET http://localhost:5000/api/professores
 GET http://localhost:5000/api/alunos
-GET http://localhost:5000/api/grade
+GET http://localhost:5000/api/gradehorarios
 GET http://localhost:5000/api/turmas
 GET http://localhost:5000/api/materiais
 ```
